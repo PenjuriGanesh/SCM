@@ -25,6 +25,7 @@ async def login(request: Request, form_data: OAuth2PasswordRequestForm = Depends
     try:
         # Check if the user exists in the database
         user_data = User_details.find_one({"user": form_data.username})
+        # print(user_data)
         
         if user_data:
             # Verify password
