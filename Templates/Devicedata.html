@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Data Stream Page</title>
+    <link rel="stylesheet" href="/static/CSS/Devicedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../static/Images/Exafluence.jpg" alt="logo" />
+            <span style="color: white; padding-left: 25px; font-weight: bold;">Exafluence</span>
+        </div>
+        <ul class="sidebar-links">
+            <h4>
+                <span>Main Menu</span>
+                <div class="menu-separator"></div>
+            </h4>
+            <li>
+                <a href="dashboard">
+                    <span class="icon"><i class="fas fa-tachometer-alt"></i></span> 
+                    <span class="text"> Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="account">
+                    <span class="icon"><i class="fas fa-user"></i></span> 
+                    <span class="text"> My Account</span>
+                </a>
+            </li>
+            <li>
+                <a href="myshipment">
+                    <span class="icon"><i class="fas fa-box"></i></span> 
+                    <span class="text"> My Shipment</span>
+                </a>
+            </li>
+            <li>
+                <a href="newshipment">
+                    <span class="icon"><i class="fas fa-plus"></i></span> 
+                    <span class="text"> New Shipment</span>
+                </a>
+            </li>
+            <li>
+                <a href="devicedata">
+                    <span class="icon"><i class="fas fa-cog"></i></span> 
+                    <span class="text"> Device Data</span>
+                </a>
+            </li>
+            <li>
+                <a href="login" class="logout" onclick="logout(event)">
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span> 
+                    <span class="text"> Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="content">
+        <h2>Device data stream</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Device_Id</th>
+                    <th>Battery_Level</th>
+                    <th>First_Sensor_temperature</th>
+                    <th>Route_From</th>
+                    <th>Route_To</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" id="device_id" placeholder="Enter Device ID"></td>
+                    <td><input type="number" id="battery_level" placeholder="Enter Battery Level" min="0" max="100"></td>
+                    <td><input type="number" id="sensor_temp" placeholder="Enter Sensor Temp"></td>
+                    <td><input type="text" id="route_from" placeholder="Enter Route From"></td>
+                    <td><input type="text" id="route_to" placeholder="Enter Route To"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="submit-btn" id="submit" onclick="validateForm(event)">Submit</button>
+        <p class="error" id="error_message"></p>
+    </div>
+
+    <script src="/static/Javascript/Devicedata.js"></script>
+</body>
+</html>

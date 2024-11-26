@@ -1,0 +1,140 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic body setup */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Overlay for background image */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);  
+    z-index: 1;
+}
+
+/* Navigation bar */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0);  
+}
+
+.nav .logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav .logo img {
+    height: 50px;  
+    width: 50px;   
+    border-radius: 50%;  
+    margin-right: 10px;  
+}
+
+.nav .logo span {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.nav .nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.nav .nav-links a:hover {
+    color: #FFD700;
+}
+
+/* Main Content Section */
+.main-content {
+    background-image: url('/static/Images/china-8859961_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    color: #e9f5db;
+    z-index: 2;
+}
+
+.main-content h1 {
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 22px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+}
+
+/* About Us Section */
+.about-us {
+    background-color: #2E3B4E;
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.about-us h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.about-us p {
+    font-size: 22px;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Contact Us Section */
+.contact-us {
+    background-color: #1C2B36;
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.contact-us h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.contact-us p {
+    font-size: 22px;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+}
+

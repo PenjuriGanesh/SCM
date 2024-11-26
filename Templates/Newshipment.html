@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Shipment page</title>
+    <link rel="stylesheet" href="../static/CSS/Newshipment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../static/Images/Exafluence.jpg" alt="logo" />
+            <span style="color: white; padding-left: 25px; font-weight: bold;">Exafluence</span>
+        </div>
+        <ul class="sidebar-links">
+            <h4>
+                <span>Main Menu</span>
+                <div class="menu-separator"></div>
+            </h4>
+            <li>
+                <a href="dashboard" id="dashboard-link">
+                    <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                    <span class="text"> Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="account" id="account-link">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="text"> My Account</span>
+                </a>
+            </li>
+            <li>
+                <a href="myshipment" id="shipment-link">
+                    <span class="icon"><i class="fas fa-box"></i></span>
+                    <span class="text"> My Shipment</span>
+                </a>
+            </li>
+            <li>
+                <a href="newshipment" id="new-shipment-link">
+                    <span class="icon"><i class="fas fa-plus"></i></span>
+                    <span class="text"> New Shipment</span>
+                </a>
+            </li>
+            <li>
+                <a href="devicedata" id="device-data-link">
+                    <span class="icon"><i class="fas fa-cog"></i></span>
+                    <span class="text"> Device Data</span>
+                </a>
+            </li>
+            <li>
+                <a href="login" class="logout" onclick="logout(event)">
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <h2>Create New Shipment</h2>
+        <form class="form-grid" id="shipment-form" action="/newshipment_user" method="post">
+            <div class="form-outline">
+                <label class="form-label" for="sinum">Shipment/Invoice Number</label>
+                <input type="number" id="sinum" name="shipment_number" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="cnum">Container Number</label>
+                <input type="number" id="cnum" name="container_number" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="goodsno">Serial Number of Goods</label>
+                <input type="number" id="goodsno" name="goods_number" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="rdetails">Route Details</label>
+                <input type="text" id="rdetails" name="route_details" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="gdtypes">Goods Type</label>
+                <input type="text" id="gdtypes" name="goods_type" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="device">Device ID</label>
+                <input type="number" id="device" name="device_id" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="exdate">Expected Delivery Date</label>
+                <input type="datetime-local" id="exdate" name="expected_delivery_date" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="ponum">PO Number</label>
+                <input type="number" id="ponum" name="po_number" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="delnum">Delivery Number</label>
+                <input type="number" id="delnum" name="delivery_number" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="ndcnum">NDC Number</label>
+                <input type="number" id="ndcnum" name="ndc_number" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="bid">Batch ID</label>
+                <input type="number" id="bid" name="batch_id" class="input-field" required />
+            </div>
+        
+            <div class="form-outline">
+                <label class="form-label" for="sdesc">Shipment Description</label>
+                <textarea rows="3" id="sdesc" name="shipment_description" class="input-field form-textarea" required></textarea>
+            </div>
+        
+            <div class="button-container">
+                <button type="submit" class="button-80" id="subbtn">Submit Shipment</button>
+                <button type="reset" class="button-80" id="canbtn">Cancel Shipment</button>
+            </div>
+        </form>        
+
+        <h3>Already have a shipment? <a href="myshipment">View your shipments</a></h3>
+    </div>
+
+    <script src="../static/Javascript/Newshipment.js"></script>
+
+</body>
+</html>

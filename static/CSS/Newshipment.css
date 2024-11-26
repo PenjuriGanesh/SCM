@@ -1,0 +1,220 @@
+/* Importing Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+
+body {
+    min-height: 100vh;
+    background: #F0F4FF;
+    display: flex;
+    font-size: 16px;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 85px; /* Collapsed width */
+    display: flex;
+    overflow-x: hidden;
+    flex-direction: column;
+    background: #161a2d;
+    padding: 25px 20px;
+    transition: all 0.4s ease;
+}
+
+.sidebar:hover {
+    width: 260px; /* Expanded width */
+}
+
+.sidebar .sidebar-header {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .sidebar-header img {
+    width: 42px;
+    border-radius: 50%;
+}
+
+.sidebar .sidebar-header h2 {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: 23px;
+    opacity: 0; /* Hidden initially */
+    transition: opacity 0.3s; /* Fade-in transition */
+}
+
+.sidebar:hover .sidebar-header h2 {
+    opacity: 1; /* Show on hover */
+}
+
+.sidebar-links h4 {
+    color: #fff;
+    font-weight: 500;
+    white-space: nowrap;
+    margin: 10px 0;
+    position: relative;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+.sidebar-links h4 span {
+    opacity: 0;
+}
+
+.sidebar:hover .sidebar-links h4 span {
+    opacity: 1;
+}
+
+.sidebar-links .menu-separator {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    transform: scaleX(1);
+    transform: translateY(-50%);
+    background: #4f52ba;
+    transform-origin: right;
+    transition-delay: 0.2s;
+}
+
+.sidebar:hover .sidebar-links .menu-separator {
+    transition-delay: 0s;
+    transform: scaleX(0);
+}
+
+.sidebar-links {
+    list-style: none;
+    margin-top: 20px;
+    height: 80%;
+    overflow-y: auto;
+    scrollbar-width: none; /* Hide scrollbar */
+}
+
+.sidebar-links::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+.sidebar-links li a {
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+    color: #fff;
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 15px 10px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.sidebar-links li a .text {
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s; /* Transition for opacity */
+}
+
+.sidebar:hover .sidebar-links li a .text {
+    opacity: 1; /* Show text on hover */
+}
+
+.sidebar-links li a:hover {
+    color: #161a2d;
+    background: #fff;
+    border-radius: 4px;
+}
+
+/* Content Section */
+.content {
+    margin-left: 100px; /* Adjust for the sidebar */
+    padding: 20px;
+    flex-grow: 1;
+    transition: margin-left 0.4s; /* Smooth margin adjustment */
+}
+
+.sidebar:hover + .content {
+    margin-left: 260px; /* Adjust content margin when sidebar is expanded */
+}
+
+h2 {
+    text-align: center; /* Center the header text */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+/* Form styles */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    grid-template-areas: 
+        "sinum rdetails"
+        "cnum gdtypes"
+        "goodsno device"
+        "exdate ponum"
+        "delnum ndcnum"
+        "bid sdesc";
+}
+
+.form-outline {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.input-field {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.button-container {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-80 {
+    padding: 12px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4f52ba;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-80:hover {
+    background-color: #3d47a4;
+}
+
+/* Links */
+h3 a {
+    text-decoration: none;
+    color: #4f52ba;
+    font-weight: 600;
+}
+
+h3 a:hover {
+    text-decoration: underline;
+}

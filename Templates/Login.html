@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="../static/CSS/login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <form id="login-form" action="/login" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="form-title">Login</div>
+        <div class="form-input">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter Username" required>
+        </div>
+        <div class="form-input">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter Password" required>
+        </div>
+        <div class="form-input">
+          <button type="submit" id="login-btn">Login</button>
+        </div>
+        <div class="form-links">
+          <span>Don't have an account? <a href="signup" class="signup-link">Sign up</a></span><br>
+          <span>Forgot your password? <a href="forgetpassword" class="forgot-password-link">Forgot password</a></span>
+        </div>
+      </form>
+    </div>
+    <div class="image-section">
+      <img src="../static/Images/truck-8656658_1280.jpg" alt="Truck Image">
+    </div>
+  </div>
+
+  <script>
+    // Handle the login form submission
+    document.getElementById("login-form").addEventListener("submit", async function (event) {
+      event.preventDefault();  // Prevent default form submission
+
+      const form = document.getElementById("login-form");
+      const formData = new FormData(form);
+
+      // Send a POST request to the /login_user endpoint
+      try {
+        const response = await fetch("/login", {
+          method: "POST",
+          body: formData
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // console.log(data);
+          const token = data.access_token;
+          localStorage.setItem('access_token', token);
+
+          console.log('JWT token stored successfully!');
+          // If login is successful, redirect to the dashboard
+          window.location.href = "/dashboard "; 
+        } else {
+          // Parse the error response and display an alert
+          const errorData = await response.json();
+          swal("Login Failed", errorData.detail || "Invalid username or password.", "error");
+        }
+      } catch (error) {
+        // Handle network or other errors
+        swal("Error", "An error occurred during the login process. Please try again.", "error");
+        console.error("Login error:", error);
+      }
+    });
+  </script>
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
