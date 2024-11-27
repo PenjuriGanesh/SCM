@@ -14,7 +14,6 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 @app.get("/newshipment")
 def newship(request: Request):      
     return html.TemplateResponse("NewShipment.html", {"request": request})
-
 @app.post("/newshipment_user")
 def newshipment(
     request: Request,
@@ -31,9 +30,8 @@ def newshipment(
     batch_id: int = Form(...),
     shipment_description: str = Form(...),
     token: str = Depends(oauth2_scheme)
-
-
 ):
+    print(device_id)
     try:
         # Check if any field is empty
         if any(value == "" for value in [
@@ -41,15 +39,18 @@ def newshipment(
             device_id, expected_delivery_date, po_number, delivery_number, ndc_number, 
             batch_id, shipment_description
         ]):
+            print('in the if')
             raise HTTPException(status_code=400, detail="All fields must be filled")
 
         # Check if shipment_number has exactly 7 characters
         if len(str(shipment_number)) != 7:  # Convert to string to check length
+            print('in the length')
             raise HTTPException(status_code=400, detail="Shipment number must be 7 characters")
         
         # Check if the shipment number already exists in the database
         existing_data = Shipments.find_one({"shipment_number": shipment_number}, {"_id": 0})
         if existing_data:
+            print('in the existing')
             raise HTTPException(status_code=400, detail="Shipment number already exists")
 
         # Decode token to get user email (extracting the token after 'Bearer ')

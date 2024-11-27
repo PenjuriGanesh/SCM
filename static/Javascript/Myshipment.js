@@ -22,8 +22,9 @@ function setupSidebar() {
     });
 }
 
+// Function to fetch shipments from the server
 async function fetchShipments() {
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem("access_token"); // Get token from localStorage
     if (!token) {
         alert("You need to be logged in to view your shipments.");
         window.location.href = "/login"; // Redirect to login page if no token
@@ -31,28 +32,34 @@ async function fetchShipments() {
     }
 
     try {
-        const response = await fetch("/login", {
+        // Make the request to the correct endpoint
+        const response = await fetch("/login", { // Correct endpoint for fetching shipments
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer ${token}`, // Add the token in Authorization header
                 "Content-Type": "application/json",
             },
         });
 
         if (response.ok) {
             const data = await response.json();
-            console.log("Shipments data:", data);
-            // Optionally, update the page content with the fetched data
+            console.log("Shipments data:", data); // Log the shipments data for debugging
+            // Optionally, update the page content with the fetched data here
+            // For example, populate a table with the fetched shipments
+
         } else {
             const errorData = await response.json();
-            alert(errorData.detail || "Failed to fetch shipments.");
+            console.error("Failed to fetch shipments. Response:", errorData);
+            // Optionally, show a user-friendly message on the page
+            document.getElementById("error-message").innerText = errorData.detail || "Failed to fetch shipments.";
         }
     } catch (error) {
-        console.error("Error fetching shipments:", error);
-        alert("An error occurred while fetching shipments.");
+        console.error("Error fetching shipments:", error); // Log the error for debugging
+        document.getElementById("error-message").innerText = "An error occurred while fetching shipments.";
     }
 }
 
+// Function to handle the logout
 function logout(event) {
     event.preventDefault();  // Prevent the default behavior (like page redirect)
   
@@ -79,12 +86,10 @@ function logout(event) {
         console.error("Logout error:", error);
         alert("Error logging out. Please try again.");
     });
-  }
-  
+}
 
 // Automatically run the authentication check and other functions on page load
 window.addEventListener("load", function () {
     setupSidebar();  // Initialize the sidebar and set the active link
     fetchShipments(); // Fetch shipments after ensuring authentication
-    logout()
 });

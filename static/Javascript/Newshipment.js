@@ -1,82 +1,79 @@
-document.getElementById('shipment-form').addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevents the default form submission
-
-    // Collect the form data as an object
-    const formData = new FormData(document.getElementById('shipment-form'));
-
-    // Additional Validation Checks
-    const sinum = formData.get('shipment_number');
-    const cnum = formData.get('container_number');
-    const goodsno = formData.get('goods_number');
-    const rdetails = formData.get('route_details');
-    const gdtypes = formData.get('goods_type');
-    const device = formData.get('device_id');
-    const exdate = formData.get('expected_delivery_date');
-    const ponum = formData.get('po_number');
-    const delnum = formData.get('delivery_number');
-    const ndcnum = formData.get('ndc_number');
-    const bid = formData.get('batch_id');
-    const sdesc = formData.get('shipment_description');
-
-    // Basic validation checks
-    if (!sinum || !cnum || !goodsno || !rdetails || !gdtypes || !device || !exdate || !ponum || !delnum || !ndcnum || !bid || !sdesc) {
-        alert('All fields are required.');
-        return;
-    }
-
-    // Retrieve the token from localStorage
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-        alert("You need to be logged in to view this page.");
-        window.location.href = "/login"; // Redirect to login page
-    }
+document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('shipment-form').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevents the default form submission
     
-
-    // Send the data to the backend using fetch API
-    fetch("/newshipment_user", {
-        method: "POST",
-        headers: {
-            'Authorization': `Bearer ${token}`,  // Add token in Authorization header
-            'Content-Type': 'application/json'   // Set Content-Type to JSON
-        },
-        body: JSON.stringify({
-            shipment_number: sinum,
-            container_number: cnum,
-            goods_number: goodsno,
-            route_details: rdetails,
-            goods_type: gdtypes,
-            device_id: device,
-            expected_delivery_date: exdate,
-            po_number: ponum,
-            delivery_number: delnum,
-            ndc_number: ndcnum,
-            batch_id: bid,
-            shipment_description: sdesc
-        })  // Convert the form data to JSON
-    })
-    .then(async (response) => {
-        if (response.ok) {
-            alert('Shipment details submitted successfully! Redirecting...');
-            window.location.href = "/myshipment"; 
-        } else {
-            const errorData = await response.json();
-            alert(errorData.detail || "Submission failed. Please try again.");
+        // Collect the form data into an object
+        const formData = {
+            shipment_number: parseInt(document.getElementById('sinum').value),
+            container_number: parseInt(document.getElementById('cnum').value),
+            goods_number: parseInt(document.getElementById('goodsno').value),
+            route_details: document.getElementById('rdetails').value,
+            goods_type: document.getElementById('gdtypes').value,
+            device_id: parseInt(document.getElementById('device').value),
+            expected_delivery_date: document.getElementById('exdate').value,
+            po_number: parseInt(document.getElementById('ponum').value),
+            delivery_number: parseInt(document.getElementById('delnum').value),
+            ndc_number: parseInt(document.getElementById('ndcnum').value),
+            batch_id: parseInt(document.getElementById('bid').value),
+            shipment_description: document.getElementById('sdesc').value
+        };
+        const formdata = new FormData()
+        for (let key in formData) {
+            formdata.append(key, formData[key]);
+            console.log(key,formData[key],typeof formData[key])
         }
-    })
-    .catch((error) => {
-        alert("An error occurred while submitting the form. Please try again later.");
-        console.error("Error:", error);
+        // Basic validation checks for required fields
+        // for (let key in Object.entries(formData)) {
+        //     console.log('inside for ',key)
+        //     if (!formData[key]) {
+        //         alert('All fields are required.');
+        //         return;
+        //     }
+        // }
+    
+        // Retrieve the token from localStorage
+        const token = localStorage.getItem("access_token");
+        if (!token) {
+            alert("You need to be logged in to submit this form.");
+            window.location.href = "/login"; // Redirect to login page
+            return;
+        }
+    
+        // Send the data to the backend using fetch API
+        fetch("/newshipment_user", {
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${token}`,  // Add token in Authorization header
+                'Content-Type': 'application/json'   // Set Content-Type to JSON
+            },
+          
+        })
+        .then(async (response) => {
+            if (response.ok) {
+                alert('Shipment details submitted successfully! Redirecting...');
+                window.location.href = "/myshipment";  // Redirect after success
+            } else {
+                const errorData = await response.json();
+                alert("Submission failed. Please try again.");
+            }
+        })
+        .catch((error) => {
+            alert("An error occurred while submitting the form. Please try again later.");
+            console.error("Error:", error);
+        });
+    
+        // Reset the form after submission
+        document.getElementById('shipment-form').reset();
     });
-
-    // Reset the form after submission
-    document.getElementById('shipment-form').reset();
-});
+    
+})
 
 // Optionally clear inputs on cancel
 function clearinput() {
     document.querySelector("form").reset();
 }
 
+// Handle logout (if used on the same page)
 function logout(event) {
     event.preventDefault();  // Prevent the default behavior (like page redirect)
   
@@ -103,5 +100,4 @@ function logout(event) {
         console.error("Logout error:", error);
         alert("Error logging out. Please try again.");
     });
-  }
-  
+}

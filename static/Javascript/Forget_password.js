@@ -5,7 +5,7 @@ function validateForm(event) {
     clearErrors();
   
     let valid = true;
-  
+
     // Get the email value
     const email = document.getElementById('email').value.trim();
   
