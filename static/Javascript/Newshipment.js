@@ -1,7 +1,8 @@
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded', () => {
+    // Event listener for form submission
     document.getElementById('shipment-form').addEventListener('submit', function(event) {
         event.preventDefault();  // Prevents the default form submission
-    
+
         // Collect the form data into an object
         const formData = {
             shipment_number: parseInt(document.getElementById('sinum').value),
@@ -17,28 +18,21 @@ document.addEventListener('DOMContentLoaded',()=>{
             batch_id: parseInt(document.getElementById('bid').value),
             shipment_description: document.getElementById('sdesc').value
         };
-        const formdata = new FormData()
-        for (let key in formData) {
-            formdata.append(key, formData[key]);
-            console.log(key,formData[key],typeof formData[key])
+
+        // Validate that shipment number is exactly 7 digits
+        if (formData.shipment_number.toString().length !== 7) {
+            alert("Shipment number must be exactly 7 digits.");
+            return; // Prevent form submission
         }
-        // Basic validation checks for required fields
-        // for (let key in Object.entries(formData)) {
-        //     console.log('inside for ',key)
-        //     if (!formData[key]) {
-        //         alert('All fields are required.');
-        //         return;
-        //     }
-        // }
-    
-        // Retrieve the token from localStorage
+
+        // Get the token from localStorage
         const token = localStorage.getItem("access_token");
         if (!token) {
             alert("You need to be logged in to submit this form.");
-            window.location.href = "/login"; // Redirect to login page
+            window.location.href = "/login";  // Redirect to login page
             return;
         }
-    
+
         // Send the data to the backend using fetch API
         fetch("/newshipment_user", {
             method: "POST",
@@ -46,32 +40,30 @@ document.addEventListener('DOMContentLoaded',()=>{
                 'Authorization': `Bearer ${token}`,  // Add token in Authorization header
                 'Content-Type': 'application/json'   // Set Content-Type to JSON
             },
-          
+            body: JSON.stringify(formData)  // Send the data as JSON
         })
         .then(async (response) => {
             if (response.ok) {
-                alert('Shipment details submitted successfully! Redirecting...');
+                alert('Shipment details submitted successfully!');
+                document.getElementById('shipment-form').reset();  // Reset the form after submission
                 window.location.href = "/myshipment";  // Redirect after success
             } else {
                 const errorData = await response.json();
-                alert("Submission failed. Please try again.");
+                alert(errorData.error_message || "Submission failed. Please try again.");
             }
         })
         .catch((error) => {
             alert("An error occurred while submitting the form. Please try again later.");
             console.error("Error:", error);
         });
-    
-        // Reset the form after submission
-        document.getElementById('shipment-form').reset();
     });
-    
-})
 
-// Optionally clear inputs on cancel
-function clearinput() {
-    document.querySelector("form").reset();
-}
+    // Event listener for "Cancel" button to reset the form fields
+    document.getElementById('canbtn').addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent default behavior of the button (if it's a submit)
+        document.getElementById('shipment-form').reset();  // Reset the form
+    });
+});
 
 // Handle logout (if used on the same page)
 function logout(event) {

@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <script>
+        const accessToken = localStorage.getItem("access_token");
+
+        if (accessToken === null) {
+            alert("To access this page you need to login");
+            window.location.href = "/login";
+        } else {
+            console.log("Access token found. User is logged in.");
+        }
+
+    </script>
     <aside class="sidebar">
         <div class="sidebar-header">
             <img src="../static/Images/Exafluence.jpg" alt="logo" />
@@ -58,9 +69,10 @@
     </aside>
 
     <div class="content">
-        <h2>Device data stream</h2>
+        <h2>Device Data Stream</h2>
 
-        <table>
+        <!-- Table to display device data -->
+        <table id="device-data-table">
             <thead>
                 <tr>
                     <th>Device_Id</th>
@@ -71,16 +83,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><input type="text" id="device_id" placeholder="Enter Device ID"></td>
-                    <td><input type="number" id="battery_level" placeholder="Enter Battery Level" min="0" max="100"></td>
-                    <td><input type="number" id="sensor_temp" placeholder="Enter Sensor Temp"></td>
-                    <td><input type="text" id="route_from" placeholder="Enter Route From"></td>
-                    <td><input type="text" id="route_to" placeholder="Enter Route To"></td>
-                </tr>
+                <!-- Data will be dynamically inserted here -->
             </tbody>
         </table>
-        <button class="submit-btn" id="submit" onclick="validateForm(event)">Submit</button>
+
         <p class="error" id="error_message"></p>
     </div>
 

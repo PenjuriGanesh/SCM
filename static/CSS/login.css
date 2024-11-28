@@ -93,46 +93,49 @@ body {
 }
 
 .login-form .captcha .captcha-form input {
-    width: 85%;
+    width: 73%;  /* Reduced the width of the CAPTCHA input box */
     outline: none;
     padding: 8px;
     border-radius: 6px;
     border: 1px solid #888;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .login-form .captcha .captcha-form .captcha-refresh {
-    width: 40px;
-    height: 40px;
+    width: auto;  /* Let the button size be auto based on its content */
+    padding: 10px 15px;  /* Increased padding for a larger button */
+    font-size: 18px;     /* Increased font size for the button text */
     border: none;
     outline: none;
-    background: #888;
+    background: #4c81ff; /* Blue background for the refresh button */
+    color: #fff;
     border-radius: 6px;
-    color: #eee;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+.login-form .captcha .captcha-form .captcha-refresh:hover {
+    background: #3b6fd6; /* Slightly darker blue on hover */
 }
 
 #login-btn {
-    margin-top: 5px;
+    margin-top: 15px;  /* Increased margin for better spacing */
     width: 100%;
-    padding: 12px;
-    border: none;
+    padding: 15px;    /* Increased padding for a larger button */
+    font-size: 16px;  /* Increased font size */
+    border: 1px solid #888; /* Optional: Add a border to the button */
     outline: none;
-    font-size: 14px;
     text-transform: uppercase;
-    background: #4c81ff;
+    background: #4c81ff;  /* Background color for login button */
+    color: #fff;          /* Text color is white */
     border-radius: 6px;
-    color: #fff;
     transition: .3s;
     cursor: pointer;
 }
 
 #login-btn:hover {
     opacity: .8;
+    background: #3b6fd6;  /* Darker background color on hover */
 }
 
 .image-section {
@@ -194,4 +197,3 @@ body {
     opacity: 1;
     visibility: visible;
 }
-

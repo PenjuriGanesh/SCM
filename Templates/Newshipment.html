@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <script>
+        const accessToken = localStorage.getItem("access_token");
+
+        if (accessToken === null) {
+            alert("To access this page you need to login")
+            window.location.href = "/login";
+
+        } else {
+           
+            console.log("Access token found. User is logged in.");
+        }
+
+    </script>
 
     <!-- Sidebar Section -->
     <aside class="sidebar">

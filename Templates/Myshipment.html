@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <script>
+        const accessToken = localStorage.getItem("access_token");
+
+        if (accessToken === null) {
+            alert("To access this page you need to login")
+            window.location.href = "/login";
+
+        } else {
+           
+            console.log("Access token found. User is logged in.");
+        }
+
+    </script>
     <aside class="sidebar">
         <div class="sidebar-header">
             <img src="../static/Images/Exafluence.jpg" alt="logo" />
@@ -58,7 +71,7 @@
     </aside>
 
     <div class="content">
-        <h2>Your Shipments</h2>
+        <h2>My Shipments</h2>
         
         <!-- Check if there are any shipments -->
         {% if shipments %}

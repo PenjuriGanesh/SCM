@@ -13,8 +13,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 async def account(request: Request, user: dict = Depends(fetch_user_from_cookie)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found or not authenticated")
-    print("hello :",user)
-    # Extract the username and email (or other details you want to show)
+    # print("hello :",user)
     username = user.get("user") 
     email = user.get("email")        
 

@@ -12,20 +12,19 @@ app.mount("/static", StaticFiles(directory= "static"), name = "static")
 
 def fetch_user_from_cookie(request: Request) -> Signup_details:
     token = request.cookies.get("access_token")
-    print("tokentoken",token)
+    # print("tokentoken",token)
     user = decode_token(token)
     return user
 
 @app.get("/dashboard")
 def dashboard(request: Request, current_user: dict = Depends(fetch_user_from_cookie)):
-    # print("current_user sdffs",current_user)
     if current_user is None:
-        raise HTTPException(status_code=401, detail="Not authenticated")
-
+        # Return a JSON response indicating authentication failure
+        return JSONResponse(content={"message": "You are not authenticated", "is_authenticated": False}, status_code=401)
+    
+    # If authenticated, render the dashboard page
     return html.TemplateResponse("Dashboard.html", {"request": request})
-
 COOKIE_NAME = "access_token"  
-
 @app.post("/logout")
 async def logout(request: Request):
     try:

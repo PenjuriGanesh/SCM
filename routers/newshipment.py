@@ -16,39 +16,28 @@ def newship(request: Request):
     return html.TemplateResponse("NewShipment.html", {"request": request})
 @app.post("/newshipment_user")
 def newshipment(
-    request: Request,
-    shipment_number: int = Form(...),
-    container_number: int = Form(...),
-    goods_number: int = Form(...),
-    route_details: str = Form(...),
-    goods_type: str = Form(...),
-    device_id: int = Form(...),
-    expected_delivery_date: str = Form(...),
-    po_number: int = Form(...),
-    delivery_number: int = Form(...),
-    ndc_number: int = Form(...),
-    batch_id: int = Form(...),
-    shipment_description: str = Form(...),
+    request: Request, 
+    shipment_details:ShipmentData ,
     token: str = Depends(oauth2_scheme)
 ):
-    print(device_id)
+    # print('shipment_details',shipment_details)
     try:
         # Check if any field is empty
         if any(value == "" for value in [
-            shipment_number, container_number, goods_number, route_details, goods_type, 
-            device_id, expected_delivery_date, po_number, delivery_number, ndc_number, 
-            batch_id, shipment_description
+            shipment_details.shipment_number, shipment_details.container_number, shipment_details.goods_number, shipment_details.route_details, shipment_details.goods_type, 
+            shipment_details.device_id, shipment_details.expected_delivery_date, shipment_details.po_number, shipment_details.delivery_number, shipment_details.ndc_number, 
+            shipment_details.batch_id, shipment_details.shipment_description
         ]):
-            print('in the if')
+            # print('in the if')
             raise HTTPException(status_code=400, detail="All fields must be filled")
 
         # Check if shipment_number has exactly 7 characters
-        if len(str(shipment_number)) != 7:  # Convert to string to check length
+        if len(str(shipment_details.shipment_number)) != 7:  # Convert to string to check length
             print('in the length')
             raise HTTPException(status_code=400, detail="Shipment number must be 7 characters")
         
         # Check if the shipment number already exists in the database
-        existing_data = Shipments.find_one({"shipment_number": shipment_number}, {"_id": 0})
+        existing_data = Shipments.find_one({"shipment_number": shipment_details.shipment_number}, {"_id": 0})
         if existing_data:
             print('in the existing')
             raise HTTPException(status_code=400, detail="Shipment number already exists")
@@ -59,20 +48,20 @@ def newshipment(
 
         # Prepare data for inserting into the database
         shipment_data = {
-            "user": decoded_token["username"],
+            "user": decoded_token["user"],
             "email": decoded_token["email"],
-            'shipment_number': shipment_number,
-            "container_number": container_number,
-            "route_details": route_details,
-            "goods_type": goods_type,
-            "device": device_id,
-            "expected_delivery": expected_delivery_date,
-            "po_number": po_number,
-            "delivery_number": delivery_number,
-            "ndc_number": ndc_number,
-            "batch_id": batch_id,
-            "serial_number": goods_number,  # Assuming this is the goods serial number
-            "shipment_description": shipment_description
+            'shipment_number': shipment_details.shipment_number,
+            "container_number": shipment_details.container_number,
+            "route_details": shipment_details.route_details,
+            "goods_type": shipment_details.goods_type,
+            "device": shipment_details.device_id,
+            "expected_delivery": shipment_details.expected_delivery_date,
+            "po_number": shipment_details.po_number,
+            "delivery_number": shipment_details.delivery_number,
+            "ndc_number": shipment_details.ndc_number,
+            "batch_id": shipment_details.batch_id,
+            "serial_number": shipment_details.goods_number,  # Assuming this is the goods serial number
+            "shipment_description": shipment_details.shipment_description
         }
 
         # Insert shipment data into the database
@@ -86,6 +75,7 @@ def newshipment(
         return JSONResponse(content={"error_message": http_error.detail}, status_code=http_error.status_code)
     except Exception as e:
         # Handle other exceptions (e.g., database issues)
+        # print(e)
         return JSONResponse(content={"detail": str(e)}, status_code=500)
 
 

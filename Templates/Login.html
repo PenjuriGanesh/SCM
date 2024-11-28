@@ -19,6 +19,17 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Enter Password" required>
         </div>
+        
+        <!-- CAPTCHA Section -->
+        <div class="form-input captcha">
+          <label for="captcha">Enter CAPTCHA</label>
+          <div class="preview" id="captchaPreview"></div>
+          <div class="captcha-form">
+            <input type="text" id="captcha" name="captcha" placeholder="Enter CAPTCHA" required>
+            <button type="button" class="captcha-refresh" onclick="generateCaptcha()">Refresh</button>
+          </div>
+        </div>
+        
         <div class="form-input">
           <button type="submit" id="login-btn">Login</button>
         </div>
@@ -33,42 +44,7 @@
     </div>
   </div>
 
-  <script>
-    // Handle the login form submission
-    document.getElementById("login-form").addEventListener("submit", async function (event) {
-      event.preventDefault();  // Prevent default form submission
-
-      const form = document.getElementById("login-form");
-      const formData = new FormData(form);
-
-      // Send a POST request to the /login_user endpoint
-      try {
-        const response = await fetch("/login", {
-          method: "POST",
-          body: formData
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          // console.log(data);
-          const token = data.access_token;
-          localStorage.setItem('access_token', token);
-
-          console.log('JWT token stored successfully!');
-          // If login is successful, redirect to the dashboard
-          window.location.href = "/dashboard "; 
-        } else {
-          // Parse the error response and display an alert
-          const errorData = await response.json();
-          swal("Login Failed", errorData.detail || "Invalid username or password.", "error");
-        }
-      } catch (error) {
-        // Handle network or other errors
-        swal("Error", "An error occurred during the login process. Please try again.", "error");
-        console.error("Login error:", error);
-      }
-    });
-  </script>
+  <script src="/static/Javascript/login.js">  </script>
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
