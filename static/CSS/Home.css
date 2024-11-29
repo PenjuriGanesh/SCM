@@ -14,17 +14,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Overlay for background image */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);  
-    z-index: 1;
-}
-
 /* Navigation bar */
 .nav {
     position: fixed;
@@ -35,7 +24,7 @@ body {
     justify-content: space-between;
     padding: 20px;
     z-index: 10;
-    background-color: rgba(0, 0, 0, 0);  
+    background-color: rgba(0, 0, 0, 0);  /* Transparent background */
 }
 
 .nav .logo {
@@ -44,10 +33,10 @@ body {
 }
 
 .nav .logo img {
-    height: 50px;  
-    width: 50px;   
-    border-radius: 50%;  
-    margin-right: 10px;  
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .nav .logo span {
@@ -71,7 +60,8 @@ body {
 
 /* Main Content Section */
 .main-content {
-    background-image: url('/static/Images/china-8859961_1280.jpg');
+    position: relative;
+    background-image: url('/static/Images/Untitled\ design\ \(2\).jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -81,60 +71,135 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative;
-    color: #e9f5db;
+    color: #e9f5db; /* Light color for the text */
     z-index: 2;
 }
 
+/* Center text */
 .main-content h1 {
     font-size: 60px;
     font-weight: 700;
     margin-bottom: 20px;
+    color: #E5E9EC ; /* Light color for the main heading */
 }
 
 .main-content p {
     font-size: 22px;
     line-height: 1.5;
     margin-bottom: 40px;
+    color: #FFF3B0; /* Light gold color for the paragraph */
 }
 
 /* About Us Section */
 .about-us {
     background-color: #2E3B4E;
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
     color: #fff;
+    background-image: url('/static/Images/about-bg.jpg'); /* Add background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5); /* Subtle darkening for text visibility */
+}
+
+/* Overlay effect for About Us section */
+.about-us::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Overlay to darken background */
+    z-index: 1;
 }
 
 .about-us h2 {
-    font-size: 40px;
+    font-size: 48px;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 2; /* Ensures heading is above overlay */
+    color: #FFD700;
 }
 
 .about-us p {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.6;
     max-width: 900px;
     margin: 0 auto;
+    padding-top: 20px;
+    position: relative;
+    z-index: 2;
+    color: #FFF3B0;
+}
+
+/* About Us hover effect */
+.about-us:hover {
+    transform: scale(1.03);
+    transition: all 0.3s ease;
 }
 
 /* Contact Us Section */
 .contact-us {
     background-color: #1C2B36;
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
     color: #fff;
+    background-image: url('/static/Images/contact-bg.jpg'); /* Add background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5); /* Subtle darkening for text visibility */
+}
+
+/* Overlay effect for Contact Us section */
+.contact-us::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Overlay to darken background */
+    z-index: 1;
 }
 
 .contact-us h2 {
-    font-size: 40px;
+    font-size: 48px;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 2; /* Ensures heading is above overlay */
+    color: #FFD700;
 }
 
 .contact-us p {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.6;
     max-width: 900px;
     margin: 0 auto;
+    padding-top: 20px;
+    position: relative;
+    z-index: 2;
+    color: #FFF3B0;
+}
+
+.contact-us a {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-us a:hover {
+    color: #fff;
+}
+
+/* Contact Us hover effect */
+.contact-us:hover {
+    transform: scale(1.03);
+    transition: all 0.3s ease;
 }
 

@@ -17,7 +17,6 @@
         } else {
             console.log("Access token found. User is logged in.");
         }
-
     </script>
     <aside class="sidebar">
         <div class="sidebar-header">
@@ -71,21 +70,26 @@
     <div class="content">
         <h2>Device Data Stream</h2>
 
-        <!-- Table to display device data -->
-        <table id="device-data-table">
-            <thead>
-                <tr>
-                    <th>Device_Id</th>
-                    <th>Battery_Level</th>
-                    <th>First_Sensor_temperature</th>
-                    <th>Route_From</th>
-                    <th>Route_To</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data will be dynamically inserted here -->
-            </tbody>
-        </table>
+        <!-- Check if user is an admin, and only show the table if true -->
+        {% if show_table %}
+            <!-- Table to display device data -->
+            <table id="device-data-table">
+                <thead>
+                    <tr>
+                        <th>Device_Id</th>
+                        <th>Battery_Level</th>
+                        <th>First_Sensor_temperature</th>
+                        <th>Route_From</th>
+                        <th>Route_To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        {% else %}
+            <p>No device data found. You are a regular user, and cannot view device data.</p>
+        {% endif %}
 
         <p class="error" id="error_message"></p>
     </div>

@@ -3,7 +3,7 @@ from jose import jwt, JWTError # type: ignore
 from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
 
-from Models.model import Signup_details
+from Models.model import Signup
 from config.config import SECRET_KEY, ACCESS_TOKEN_EXPIRE_MINUTES, ALGORITHM, User_details
 from typing import Dict
 
@@ -17,16 +17,9 @@ def create_access_token(data: Dict, expires_delta: timedelta = None) -> str:
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-def get_user(email:str):
-    # print("email",email)
-    Existing_user= User_details.find_one({'email': email})
-    # print("Existing_user",Existing_user)
-    if not  Existing_user:
-        return None
-    else:
-        return Existing_user
 
-def decode_token(token: str) -> Signup_details:
+
+def decode_token(token: str) -> Signup:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials"
@@ -49,37 +42,12 @@ def decode_token(token: str) -> Signup_details:
     except JWTError as e:
         print(e)
         raise credentials_exception
-
-def verify_token(token: str = Depends(oauth2_scheme)):
-    # print(f"Received token: {token}")  # Debugging line
-    try:
-        payload = decode_token(token)
-        return payload
-    except JWTError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
-        )
-
-
-# Function to get the current user from the JWT token
-def get_current_user(token: str = Depends(oauth2_scheme)) -> Dict:
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED, 
-        detail="Could not validate credentials"
-    )
-    if not token:
-        raise credentials_exception
-    try:
-        token = token.removeprefix("Bearer").strip()  # Remove "Bearer" prefix
-        payload = decode_token(token)
-        email = payload.get("email")
-        if not email:
-            raise credentials_exception
-        # Assuming `User_details` is your MongoDB collection
-        user_data = User_details.find_one({"email": email})
-        if not user_data:
-            raise credentials_exception
-        return user_data
-    except JWTError:
-        raise credentials_exception
+    
+def get_user(email:str):
+    # print("email",email)
+    Existing_user= User_details.find_one({'email': email})
+    # print("Existing_user",Existing_user)
+    if not  Existing_user:
+        return None
+    else:
+        return Existing_user

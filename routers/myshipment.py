@@ -3,7 +3,6 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from config.config import Shipments  
-from routers.Jwt_tokens import get_current_user
 from routers.dashboard import fetch_user_from_cookie
 
 app = APIRouter()

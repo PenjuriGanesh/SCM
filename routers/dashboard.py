@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends,HTTPException,Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from Models.model import Signup_details
+from Models.model import Signup
 from fastapi.responses import JSONResponse
 from routers.Jwt_tokens import decode_token
 
@@ -10,7 +10,7 @@ html=Jinja2Templates(directory="Templates")
 app.mount("/static", StaticFiles(directory= "static"), name = "static")
 
 
-def fetch_user_from_cookie(request: Request) -> Signup_details:
+def fetch_user_from_cookie(request: Request) -> Signup:
     token = request.cookies.get("access_token")
     # print("tokentoken",token)
     user = decode_token(token)
