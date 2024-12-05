@@ -1,15 +1,14 @@
-from fastapi import APIRouter, Request, Depends, HTTPException, Form
+from fastapi import APIRouter, Request, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from config.config import Shipments  
-from fastapi.security import OAuth2PasswordBearer
 from routers.Jwt_tokens import oauth2_scheme, decode_token
 from Models.model import ShipmentData 
 app = APIRouter()
 html = Jinja2Templates(directory="Templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
+
 
 @app.get("/newshipment")
 def newship(request: Request):      
@@ -20,29 +19,23 @@ def newshipment(
     shipment_details:ShipmentData ,
     token: str = Depends(oauth2_scheme)
 ):
-    # print('shipment_details',shipment_details)
     try:
-        # Check if any field is empty
+        
         if any(value == "" for value in [
             shipment_details.shipment_number, shipment_details.container_number, shipment_details.goods_number, shipment_details.route_details, shipment_details.goods_type, 
             shipment_details.device_id, shipment_details.expected_delivery_date, shipment_details.po_number, shipment_details.delivery_number, shipment_details.ndc_number, 
             shipment_details.batch_id, shipment_details.shipment_description
         ]):
-            # print('in the if')
+    
             raise HTTPException(status_code=400, detail="All fields must be filled")
 
-        # Check if shipment_number has exactly 7 characters
-        if len(str(shipment_details.shipment_number)) != 7:  # Convert to string to check length
-            print('in the length')
-            raise HTTPException(status_code=400, detail="Shipment number must be 7 characters")
-        
         # Check if the shipment number already exists in the database
         existing_data = Shipments.find_one({"shipment_number": shipment_details.shipment_number}, {"_id": 0})
         if existing_data:
-            print('in the existing')
+            
             raise HTTPException(status_code=400, detail="Shipment number already exists")
 
-        # Decode token to get user email (extracting the token after 'Bearer ')
+        
         decoded_token = decode_token(token)
         # print("decoded_token",decoded_token)
 

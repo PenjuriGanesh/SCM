@@ -1,5 +1,5 @@
-from fastapi import APIRouter, HTTPException, Request, Form
-from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
+from fastapi import APIRouter, Request, Form
+from fastapi.responses import RedirectResponse
 from Models.model import Signup
 from config.config import User_details
 from fastapi.templating import Jinja2Templates
@@ -13,10 +13,12 @@ app.mount("/static", StaticFiles(directory= "static"), name = "static")
 html = Jinja2Templates(directory="Templates")
 
 
-@app.get("/signup", response_class=HTMLResponse)
+@app.get("/signup")
 def sign(request: Request):
     return html.TemplateResponse("sign_up.html", {"request": request, "error_message": None})
-@app.post("/signup", response_class=HTMLResponse)
+
+
+@app.post("/signup")
 def sign(request: Request, username: str = Form(...), email: str = Form(...), role: str = Form("user"),
          password: str = Form(...), confirm: str = Form(...)):
     try:

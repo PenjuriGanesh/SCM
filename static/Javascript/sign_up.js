@@ -1,5 +1,4 @@
 function validateForm(event) {
-    // Prevent form from submitting if validation fails
     event.preventDefault();
     
     // Clear any previous error messages
@@ -14,7 +13,6 @@ function validateForm(event) {
     const confirmPassword = document.getElementById('confirm-password').value.trim();
     const terms = document.getElementById('terms').checked;
   
-    // Username validation (already done in backend, skip this check in JS)
     if (username === '') {
         document.getElementById('usernameError').textContent = 'Username is required.';
         valid = false;
@@ -23,33 +21,18 @@ function validateForm(event) {
         valid = false;
     }
 
-    // Email validation (already done in backend, skip this check in JS)
     if (email === '') {
         document.getElementById('emailError').textContent = 'Email is required.';
         valid = false;
     }
 
-    // Password validation
-if (password === '') {
-    document.getElementById('passwordError').textContent = 'Password is required.';
-    valid = false;
-}  else if (!/^[A-Z]/.test(password)) {  // Check if password starts with a capital letter
-    document.getElementById('passwordError').textContent = 'Password must start with a capital letter.';
-    valid = false;
-} else if (!/\d/.test(password)) {  // Check if password contains at least one digit
-    document.getElementById('passwordError').textContent = 'Password should contain at least one digit.';
-    valid = false;
-} else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {  // Check if password contains at least one special character
-    document.getElementById('passwordError').textContent = 'Password should contain at least one special character.';
-    valid = false;
-} else if (!/[a-z]/.test(password)) { // Ensure that the password has at least one lowercase letter
-    document.getElementById('passwordError').textContent = 'Password should contain at least one lowercase letter.';
-    valid = false;
-}else if (password.length < 7) {  // Check if password is at least 7 characters long
-    document.getElementById('passwordError').textContent = 'Password should be at least 7 characters long.';
-    valid = false;
-}
-
+    if (password === '') {
+        document.getElementById('passwordError').textContent = 'Password is required.';
+        valid = false;
+    } else if (password.length < 7) {  
+        document.getElementById('passwordError').textContent = 'Password should be at least 7 characters long.';
+        valid = false;
+    }
 
     // Confirm password validation
     if (confirmPassword === '') {
@@ -68,7 +51,7 @@ if (password === '') {
   
     // If the form is valid, show success alert and reset the form (simulating a successful signup)
     if (valid) {
-        document.getElementById('signupForm').reset(); // Reset the form after successful signup (optional)
+        document.getElementById('signupForm').reset();
     }
 }
 

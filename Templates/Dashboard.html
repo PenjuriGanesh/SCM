@@ -8,19 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <script>
-        const accessToken = localStorage.getItem("access_token");
-
-        if (accessToken === null) {
-            alert("To access this page you need to login")
-            window.location.href = "/login";
-
-        } else {
-           
-            console.log("Access token found. User is logged in.");
-        }
-
-    </script>
     <!-- Canvas element -->
     <canvas id="canvas"></canvas>
 
@@ -36,37 +23,37 @@
                 <div class="menu-separator"></div>
             </h4>
             <li>
-                <a href="dashboard">
+                <a href="/dashboard">
                     <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                     <span class="text"> Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="account">
+                <a href="/account">
                     <span class="icon"><i class="fas fa-user"></i></span>
                     <span class="text"> My Account</span>
                 </a>
             </li>
             <li>
-                <a href="myshipment">
+                <a href="/myshipment">
                     <span class="icon"><i class="fas fa-box"></i></span>
                     <span class="text"> My Shipment</span>
                 </a>
             </li>
             <li>
-                <a href="newshipment">
+                <a href="/newshipment">
                     <span class="icon"><i class="fas fa-plus"></i></span>
                     <span class="text"> New Shipment</span>
                 </a>
             </li>
             <li>
-                <a href="devicedata" id="device-data-link">
+                <a href="/devicedata" id="device-data-link">
                     <span class="icon"><i class="fas fa-cog"></i></span>
                     <span class="text"> Device Data</span>
                 </a>
             </li>
             <li>
-                <a href="login" class="logout" onclick="logout(event)">
+                <a href="/login" class="logout" onclick="logout(event)">
                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                     <span class="text">Logout</span>
                 </a>
@@ -91,15 +78,15 @@
         // Get the access token from localStorage
         const token = localStorage.getItem("access_token");
     
-        // Decode the JWT token and extract user data
+        // Decode the JWT token and extract user data.Extract without backend call
         function decodeToken(token) {
-            const base64Url = token.split('.')[1];
+            const base64Url = token.split('.')[1]; // header
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {  //atob is used for convert base64 to normal string
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); // hexadecimal representation
             }).join(''));
     
-            return JSON.parse(jsonPayload);
+            return JSON.parse(jsonPayload); // Parse JSON into an object
         }
     
         // Decode the token and get the user's name
@@ -136,7 +123,7 @@
     
             // Send a request to the backend to delete the cookie
             fetch("/logout", {
-                method: "POST",  // Make a POST request to the /logout endpoint
+                method: "POST",  
                 credentials: "same-origin",  // Ensure cookies are sent with the request
                 headers: {
                     "Content-Type": "application/json"  // Ensure the request is in JSON format

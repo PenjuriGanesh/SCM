@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends,HTTPException,Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from Models.model import Signup
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse,RedirectResponse
 from routers.Jwt_tokens import decode_token
 
 app=APIRouter()
@@ -19,8 +19,8 @@ def fetch_user_from_cookie(request: Request) -> Signup:
 @app.get("/dashboard")
 def dashboard(request: Request, current_user: dict = Depends(fetch_user_from_cookie)):
     if current_user is None:
-        # Return a JSON response indicating authentication failure
-        return JSONResponse(content={"message": "You are not authenticated", "is_authenticated": False}, status_code=401)
+        # Redirect to login with alert parameter
+        return RedirectResponse(url="/login?alert=true")
     
     # If authenticated, render the dashboard page
     return html.TemplateResponse("Dashboard.html", {"request": request})

@@ -45,6 +45,17 @@
   </div>
 
   <script src="/static/Javascript/login.js">  </script>
+  <script>
+    // Display alert if redirected with alert=true parameter
+    document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const alertParam = urlParams.get('alert');
+      
+      if (alertParam === "true") {
+        swal("Unauthorized Access", "You need to log in to access that page.", "warning");
+      }
+    });
+  </script>
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>

@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import List
 
 
 
@@ -26,7 +25,6 @@ class ShipmentData(BaseModel):
     ndc_number: int
     batch_id: int
     shipment_description: str
-
 
 
 

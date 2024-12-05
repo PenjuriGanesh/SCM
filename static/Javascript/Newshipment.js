@@ -27,12 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Get the token from localStorage
         const token = localStorage.getItem("access_token");
-        if (!token) {
-            alert("You need to be logged in to submit this form.");
-            window.location.href = "/login";  // Redirect to login page
-            return;
-        }
-
+        
         // Send the data to the backend using fetch API
         fetch("/newshipment_user", {
             method: "POST",
@@ -58,23 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Event listener for "Cancel" button to reset the form fields
     document.getElementById('canbtn').addEventListener('click', function(event) {
         event.preventDefault();  // Prevent default behavior of the button (if it's a submit)
         document.getElementById('shipment-form').reset();  // Reset the form
     });
 });
 
-// Handle logout (if used on the same page)
 function logout(event) {
     event.preventDefault();  // Prevent the default behavior (like page redirect)
   
-    // Remove the JWT token from localStorage
+
     localStorage.removeItem("access_token");
   
     // Send a request to the backend to delete the cookie
     fetch("/logout", {
-        method: "POST",  // Make a POST request to the /logout endpoint
+        method: "POST", 
         credentials: "same-origin",  // Ensure cookies are sent with the request
         headers: {
             "Content-Type": "application/json"  // Ensure the request is in JSON format

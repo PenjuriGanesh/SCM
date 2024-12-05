@@ -275,7 +275,7 @@ h2 {
         margin-left: 100px; /* Adjust for the sidebar */
         padding: 20px;
         flex-grow: 1;
-        transition: margin-left 0.4s; /* Smooth margin adjustment */
+        transition: margin-left 0.4s; 
         position: relative; /* For positioning the canvas */
         height: 100vh; /* Ensure content takes full height */
         display: flex; /* Use Flexbox to manage layout */

@@ -21,18 +21,11 @@ function validateForm(event) {
         document.getElementById('emailError').textContent = 'Email cannot contain spaces.';
         valid = false;
     }
-  
-    // Check if email is already registered (no AJAX, using a hardcoded list)
-    const existingEmails = ['test@example.com', 'user@domain.com'];  // Simulated list of registered emails
-    if (!existingEmails.includes(email)) {
-        document.getElementById('emailError').textContent = 'This email is not registered.';
-        valid = false;
-    }
-  
-    // If the form is valid, show success alert and reset the form (simulating a successful password reset request)
+
+    // If the form is valid, submit the form
     if (valid) {
+        // Simulate a successful submission (will be handled server-side)
         alert('Password reset request sent! Check your email for further instructions.');
-        document.getElementById('forgotPasswordForm').reset(); // Reset the form after successful request
     }
 }
 

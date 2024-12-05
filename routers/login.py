@@ -38,7 +38,7 @@ async def login(request: Request, form_data: OAuth2PasswordRequestForm = Depends
                     
                 })
                 
-                response_content = {
+                response_content = {           #dictionary is used to structure the data that is send to client
                     "access_token": token,
                     "username": user_data["user"],
                     "email": user_data["email"],
@@ -58,4 +58,5 @@ async def login(request: Request, form_data: OAuth2PasswordRequestForm = Depends
     except HTTPException as http_exception:
         return JSONResponse(content={"detail": http_exception.detail}, status_code=http_exception.status_code)
     except Exception as e:
+        print(e)
         return JSONResponse(content={"detail": str(e)}, status_code=500)

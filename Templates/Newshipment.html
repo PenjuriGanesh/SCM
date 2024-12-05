@@ -8,19 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <script>
-        const accessToken = localStorage.getItem("access_token");
-
-        if (accessToken === null) {
-            alert("To access this page you need to login")
-            window.location.href = "/login";
-
-        } else {
-           
-            console.log("Access token found. User is logged in.");
-        }
-
-    </script>
 
     <!-- Sidebar Section -->
     <aside class="sidebar">
@@ -34,37 +21,37 @@
                 <div class="menu-separator"></div>
             </h4>
             <li>
-                <a href="dashboard" id="dashboard-link">
+                <a href="/dashboard" id="dashboard-link">
                     <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                     <span class="text"> Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="account" id="account-link">
+                <a href="/account" id="account-link">
                     <span class="icon"><i class="fas fa-user"></i></span>
                     <span class="text"> My Account</span>
                 </a>
             </li>
             <li>
-                <a href="myshipment" id="shipment-link">
+                <a href="/myshipment" id="shipment-link">
                     <span class="icon"><i class="fas fa-box"></i></span>
                     <span class="text"> My Shipment</span>
                 </a>
             </li>
             <li>
-                <a href="newshipment" id="new-shipment-link">
+                <a href="/newshipment" id="new-shipment-link">
                     <span class="icon"><i class="fas fa-plus"></i></span>
                     <span class="text"> New Shipment</span>
                 </a>
             </li>
             <li>
-                <a href="devicedata" id="device-data-link">
+                <a href="/devicedata" id="device-data-link">
                     <span class="icon"><i class="fas fa-cog"></i></span>
                     <span class="text"> Device Data</span>
                 </a>
             </li>
             <li>
-                <a href="login" class="logout" onclick="logout(event)">
+                <a href="/login" class="logout" onclick="logout(event)">
                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                     <span class="text">Logout</span>
                 </a>
@@ -142,7 +129,7 @@
             </div>
         </form>        
 
-        <h3>Already have a shipment? <a href="myshipment">View your shipments</a></h3>
+        <h3>Already have a shipment? <a href="/myshipment">View your shipments</a></h3>
     </div>
 
     <script src="../static/Javascript/Newshipment.js"></script>

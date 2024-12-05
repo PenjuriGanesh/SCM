@@ -1,4 +1,3 @@
- // Variables
  let captchaCode = '';
 
  // Function to generate a random CAPTCHA code
@@ -42,8 +41,6 @@
        // Store the JWT token in localStorage
        const token = data.access_token;
        localStorage.setItem('access_token', token);
-
-       console.log('JWT token stored successfully!');
        // If login is successful, redirect to the dashboard
        window.location.href = "/dashboard";
      } else {
