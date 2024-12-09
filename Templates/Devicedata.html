@@ -59,6 +59,9 @@
     </aside>
 
     <div class="content">
+        <!-- Error message container at the top of the page -->
+        <p class="error" id="error_message" style="color: red; font-weight: bold;"></p>
+
         <h2>Device Data Stream</h2>
 
         <!-- Dropdown for DEVICE ID - Only visible for admins -->
@@ -71,7 +74,11 @@
                 <option value="1156053077">1156053077</option>
                 <option value="1156053078">1156053078</option>
             </select>
-            <button class="nextBtn" id="submit">GET DATA</button>
+            <div class="button-container">
+                <button class="nextBtn" id="submit">GET DATA</button>
+                <!-- Refresh Button -->
+                <button class="nextBtn" id="refresh">REFRESH</button>
+            </div>
         </div>
         {% endif %}
         
@@ -89,14 +96,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data will be dynamically inserted here -->
+                    {% for device in device_data %}
+                    <tr>
+                        <td>{{ device.Device_Id or "N/A" }}</td>
+                        <td>{{ device.Battery_Level or "N/A" }}</td>
+                        <td>{{ device.First_Sensor_temperature or "N/A" }}</td>
+                        <td>{{ device.Route_From or "N/A" }}</td>
+                        <td>{{ device.Route_To or "N/A" }}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         {% else %}
             <p>No device data found. You are a regular user, and cannot view device data.</p>
         {% endif %}
 
-        <p class="error" id="error_message"></p>
     </div>
 
     <script src="/static/Javascript/Devicedata.js"></script>

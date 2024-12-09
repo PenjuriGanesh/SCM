@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <script>
+        // Check if user is authenticated (has access token)
+        function checkAuthentication() {
+            const token = localStorage.getItem("access_token");
+            if (!token) {
+                alert("You need to log in to access this page.");
+                window.location.href = "/login";  // Redirect to the login page
+            }
+        }
+
+        // Call checkAuthentication when the page loads
+        checkAuthentication();
+    </script>
 
     <!-- Sidebar Section -->
     <aside class="sidebar">

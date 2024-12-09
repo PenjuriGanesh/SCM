@@ -1,7 +1,7 @@
 # Fetches the image of Python 3.11.4 from the Docker Hub
 FROM python:3.13.0
 
-# Set the working directory inside the container to /DASHBOARD/app/Kafka/Server/.
+# Set the working directory inside the container to /app
 WORKDIR /Kafka/consumer
 
 # Copy the contents of the current directory into the above mentioned container's workdir.

@@ -1,6 +1,6 @@
 from confluent_kafka import Consumer
 from dotenv import load_dotenv
-import json, logging, os
+import json,os
 from pymongo import MongoClient
 from pymongo.database import Database
  
@@ -39,34 +39,34 @@ try:
             if msg is None:
                 continue
             if msg.error():
-                logging.error(f"Consumer error: {msg.error()}")
+                print(f"Consumer error: {msg.error()}")
                 continue
  
             try:
                 raw_message = msg.value().decode('utf-8')
-                logging.info(f"Raw message received: {raw_message}")
+                print(f"Raw message received: {raw_message}")
                 data = json.loads(raw_message)
  
                 if isinstance(data, str):
                     data = json.loads(data)
  
-                logging.info(f"Deserialized data: {data}")
+                print(f"Deserialized data: {data}")
  
                 if isinstance(data, list):
                     device_data_stream1.insert_many(data)
-                    logging.info(f"Inserted data: {data}")
+                    print(f"Inserted data: {data}")
                 elif isinstance(data, dict):
                     device_data_stream1.insert_one(data)
-                    logging.info(f"Inserted data: {data}")
+                    print(f"Inserted data: {data}")
                 else:
-                    logging.warning(f"Invalid data format: {data}")
+                    print(f"Invalid data format: {data}")
             except Exception as e:
-                logging.error(f"Error processing message: {str(e)}")
+                print(f"Error processing message: {str(e)}")
  
 except KeyboardInterrupt:
-        logging.info("Consumer interrupted by user.")
+        print("Consumer interrupted by user.")
    
 finally:
         consumer.close()
-        logging.info("Consumer closed")      
+
    
