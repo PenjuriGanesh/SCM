@@ -22,7 +22,7 @@ function logout(event) {
   })
   .catch(error => {
       console.error("Logout error:", error);
-      alert("Error logging out. Please try again.");
+    
   });
 }
 

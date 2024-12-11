@@ -8,25 +8,50 @@ from routers.dashboard import fetch_user_from_cookie
 app = APIRouter()
 html = Jinja2Templates(directory="Templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
 @app.get("/myshipment")
 def my_shipments(request: Request, current_user: dict = Depends(fetch_user_from_cookie)):
     if current_user is None:
         return RedirectResponse(url="/login?alert=true")
 
     try:
-        # Fetch shipments for the authenticated user
-        shipments = list(Shipments.find({"email": current_user["email"]}, {"_id": 0}))
+        # Fetch shipments for the authenticated user or all shipments for admin
+        if current_user.get("role") == "admin":  # Assuming the user role is stored in `current_user`
+            shipments = list(
+                Shipments.find(
+                    {},  # Admin fetches all shipments
+                    {
+                        "_id": 0
+                       
+                    },
+                )
+            )
+        else:
+            shipments = list(
+                Shipments.find(
+                    {"email": current_user["email"]},  # Regular users fetch only their shipments
+                    {
+                        "_id": 0
+                    },
+                )
+            )
 
-        # If no shipments found, render with a message
         if not shipments:
-            return html.TemplateResponse("Myshipment.html", {"request": request, "shipments": [], "error_message": "No shipments found for this user."})
+            return html.TemplateResponse(
+                "Myshipment.html",
+                {"request": request, "shipments": [], "error_message": "No shipments found."},
+            )
 
-        # Render shipments data
-        return html.TemplateResponse("Myshipment.html", {"request": request, "shipments": shipments, "error_message": None})
+        return html.TemplateResponse(
+            "Myshipment.html",
+            {"request": request, "shipments": shipments, "error_message": None},
+        )
 
     except Exception as e:
-        return html.TemplateResponse("Myshipment.html", {"request": request, "shipments": [], "error_message": str(e)})
+        return html.TemplateResponse(
+            "Myshipment.html",
+            {"request": request, "shipments": [], "error_message": str(e)},
+        )
+
 
 COOKIE_NAME = "access_token"
 @app.post("/logout")

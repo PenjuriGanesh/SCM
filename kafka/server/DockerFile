@@ -1,11 +1,11 @@
-# Fetches the image of Python 3.11.4 from the Docker Hub
-FROM python:3.13.0
+# Fetches the image of Python 
+FROM python:3.12.7
 
 # Set the working directory inside the container to /app
-WORKDIR /Kafka/server
+WORKDIR /kafka/server
 
 # Copy the contents of the current directory into the above mentioned container's workdir.
-COPY . /Kafka/server
+COPY . /kafka/server
 
 # Run the pip install command inside the container to install the specified Python packages.
 RUN pip install confluent-kafka

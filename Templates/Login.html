@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Form</title>
   <link rel="stylesheet" href="../static/CSS/login.css">
@@ -28,6 +28,7 @@
             <input type="text" id="captcha" name="captcha" placeholder="Enter CAPTCHA" required>
             <button type="button" class="captcha-refresh" onclick="generateCaptcha()">Refresh</button>
           </div>
+          <div class="captcha-error" id="captchaError" style="color: red; display: none;">Incorrect CAPTCHA. Please try again.</div>
         </div>
         
         <div class="form-input">
@@ -37,6 +38,13 @@
           <span>Don't have an account? <a href="signup" class="signup-link">Sign up</a></span><br>
           <span>Forgot your password? <a href="forgetpassword" class="forgot-password-link">Forgot password</a></span>
         </div>
+
+        <!-- Error Message Display -->
+        {% if error_message %}
+          <div class="error-message" style="color: red; margin-top: 10px;">
+            {{ error_message }}
+          </div>
+        {% endif %}
       </form>
     </div>
     <div class="image-section">
@@ -44,19 +52,6 @@
     </div>
   </div>
 
-  <script src="/static/Javascript/login.js">  </script>
-  <script>
-    // Display alert if redirected with alert=true parameter
-    document.addEventListener("DOMContentLoaded", function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const alertParam = urlParams.get('alert');
-      
-      if (alertParam === "true") {
-        swal("Unauthorized Access", "You need to log in to access that page.", "warning");
-      }
-    });
-  </script>
-
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="/static/Javascript/login.js"></script>
 </body>
 </html>

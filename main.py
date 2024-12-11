@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from routers import signup, home, login ,forgetpassword ,dashboard ,account, newshipment , devicedata , myshipment
+from routers import signup, home, login ,forgetpassword ,dashboard ,account, newshipment , devicedata , myshipment,users
 
 
 
@@ -19,4 +19,5 @@ app.include_router(account.app)
 app.include_router(myshipment.app)
 app.include_router(newshipment.app)
 app.include_router(devicedata.app)
+app.include_router(users.app)
 

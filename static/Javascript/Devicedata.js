@@ -2,11 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to get authorization headers
     function getAuthHeaders() {
         const token = localStorage.getItem("access_token");
-        if (!token) {
-            displayError("Authentication required. Please log in.");
-            window.location.href = "/login";
-            return null;
-        }
         return {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -21,14 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to fetch and display filtered device data
     async function fetchFilteredDeviceData(deviceId) {
-        const apiUrl = "/devicedata-fetch";  // Changed to post request
+        const apiUrl = "/devicedata-fetch";  
 
         try {
             const headers = getAuthHeaders();
             if (!headers) return;
     
             const response = await fetch(apiUrl, {
-                method: "POST",  // Use POST instead of GET
+                method: "POST",  
                 headers: headers,
                 body: JSON.stringify({ Device_ID: deviceId })
             });
@@ -44,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
             if (data.device_data && Array.isArray(data.device_data)) {
                 if (data.device_data.length === 0) {
-                    // Display error message in the HTML instead of alert
+                    // Display error message in the HTML 
                     displayError("No data found for the selected Device ID.");
                 } else {
                     displayError("");  // Clear any previous error messages
@@ -107,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function logout(event) {
     event.preventDefault();  // Prevent the default behavior (like page redirect)
   
-    // Remove the JWT token from localStorage
+    
     localStorage.removeItem("access_token");
   
     // Send a request to the backend to delete the cookie
@@ -128,6 +123,6 @@ function logout(event) {
     })
     .catch(error => {
         console.error("Logout error:", error);
-        alert("Error logging out. Please try again.");
+        Error("Error logging out. Please try again.");
     });
 }

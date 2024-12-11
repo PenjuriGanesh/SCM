@@ -21,7 +21,7 @@ def handle_forget_password(request: Request):
     # print(user)
     
     if user:
-        print(message)
+        # print(message)
         message = "Password reset link has been sent to your email."
     else:
         # If user not found, show this message

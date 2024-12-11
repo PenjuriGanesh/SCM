@@ -49,6 +49,12 @@
                 </a>
             </li>
             <li>
+                <a href="/users">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="text">Users</span>
+                </a>
+            </li>
+            <li>
                 <a href="/login" class="logout" onclick="logout(event)">
                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                     <span class="text"> Logout</span>
@@ -59,12 +65,13 @@
 
     <div class="content">
         <h2>My Shipments</h2>
-        
+
         <!-- Check if there are any shipments -->
         {% if shipments %}
         <table>
             <thead>
                 <tr>
+                    <th>Username</th>
                     <th>Shipment Number</th>
                     <th>Route Details</th>
                     <th>Device</th>
@@ -83,6 +90,7 @@
                 <!-- Loop through the shipments and display their details -->
                 {% for shipment in shipments %}
                 <tr>
+                    <td>{{ shipment.user }}</td>
                     <td>{{ shipment.shipment_number }}</td>
                     <td>{{ shipment.route_details }}</td>
                     <td>{{ shipment.device }}</td>
@@ -104,4 +112,5 @@
         {% endif %}
     </div>
     <script src="/static/Javascript/Myshipment.js"></script> 
+</body>
 </html>

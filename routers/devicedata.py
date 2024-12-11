@@ -1,4 +1,4 @@
-from fastapi import Request, APIRouter, Depends
+from fastapi import Request, APIRouter, Depends,HTTPException
 from fastapi.responses import JSONResponse, RedirectResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from config.config import Device_Data_Stream
@@ -42,9 +42,20 @@ async def fetch_device_data(request: Request):
             return JSONResponse(content={"error_message": "Device ID is required."}, status_code=400)
     except Exception as e:
         return JSONResponse(content={"error_message": str(e)}, status_code=500)
+    
 
+COOKIE_NAME = "access_token"  
 @app.post("/logout")
 async def logout(request: Request):
-    response = JSONResponse(content={"message": "Logged out"})
-    response.delete_cookie("access_token")
-    return response
+    try:
+        # Create a response object to handle logout and clear the cookie
+        response = JSONResponse(content={"message": "Logged out"})
+        
+        response.delete_cookie(COOKIE_NAME)  
+        
+        return response  
+
+    except KeyError as exc:
+        raise HTTPException(status_code=400, detail="Cookie name not found.") from exc
+    except Exception as exception:
+        raise HTTPException(status_code=500, detail=str(exception)) from exception

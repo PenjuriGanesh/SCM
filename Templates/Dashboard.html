@@ -53,6 +53,12 @@
                 </a>
             </li>
             <li>
+                <a href="/users">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="text">Users</span>
+                </a>
+            </li>
+            <li>
                 <a href="/login" class="logout" onclick="logout(event)">
                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                     <span class="text">Logout</span>
@@ -75,7 +81,7 @@
     <script src="../static/Javascript/Dashboard.js"></script>
 
     <script>
-        // Get the access token from localStorage
+
         const token = localStorage.getItem("access_token");
     
         // Decode the JWT token and extract user data.Extract without backend call
@@ -93,28 +99,28 @@
         const user = decodeToken(token);
         const userName = user.username || "User"; 
     
-        // Display the user's name in the welcome message
+        
         document.getElementById('welcome-message').innerText = `Hey ${userName}, welcome to SCMXpertLite — where amazing things happen! 🚀`;
     
         // Function to set the Authorization header for any API requests
         function getAuthHeaders() {
             return {
-                'Authorization': `Bearer ${token}`,  // Add the access token to the Authorization header
-                'Content-Type': 'application/json'   // Set Content-Type to JSON for API requests
+                'Authorization': `Bearer ${token}`,  
+                'Content-Type': 'application/json'   
             };
         }
     
-        // Update: Redirect to /devicedata page when the "Device Data Stream" button is clicked
+        
         document.getElementById("device-data-stream-btn").addEventListener('click', () => {
-            window.location.href = "/devicedata";  // Redirect the user to the 'devicedata' page
+            window.location.href = "/devicedata"; 
         });
     
-        // Update: Redirect to /myshipment page when the "Shipment Data" button is clicked
+      
         document.getElementById("shipment-data-btn").addEventListener('click', () => {
-            window.location.href = "/myshipment";  // Redirect the user to the 'myshipment' page
+            window.location.href = "/myshipment"; 
         });
     
-        // Logout function (already present in your code)
+        
         function logout(event) {
             event.preventDefault();  // Prevent the default behavior (like page redirect)
     
@@ -130,6 +136,7 @@
                 }
             })
             .then(response => {
+                
                 if (response.ok) {
                     // If logout is successful, redirect to login page
                     window.location.href = "/login";
@@ -139,7 +146,7 @@
             })
             .catch(error => {
                 console.error("Logout error:", error);
-                alert("Error logging out. Please try again.");
+                
             });
         }
     </script>

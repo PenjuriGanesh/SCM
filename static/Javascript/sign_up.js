@@ -49,7 +49,7 @@ function validateForm(event) {
         valid = false;
     }
   
-    // If the form is valid, show success alert and reset the form (simulating a successful signup)
+  
     if (valid) {
         document.getElementById('signupForm').reset();
     }

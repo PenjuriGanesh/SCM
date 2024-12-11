@@ -13,6 +13,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/newshipment")
 def newship(request: Request):      
     return html.TemplateResponse("NewShipment.html", {"request": request})
+
+
 @app.post("/newshipment_user")
 def newshipment(
     request: Request, 
@@ -43,7 +45,7 @@ def newshipment(
         shipment_data = {
             "user": decoded_token["user"],
             "email": decoded_token["email"],
-            'shipment_number': shipment_details.shipment_number,
+            "shipment_number": shipment_details.shipment_number,
             "container_number": shipment_details.container_number,
             "route_details": shipment_details.route_details,
             "goods_type": shipment_details.goods_type,
@@ -53,7 +55,7 @@ def newshipment(
             "delivery_number": shipment_details.delivery_number,
             "ndc_number": shipment_details.ndc_number,
             "batch_id": shipment_details.batch_id,
-            "serial_number": shipment_details.goods_number,  # Assuming this is the goods serial number
+            "serial_number": shipment_details.goods_number,  # Assuming this is the serial number
             "shipment_description": shipment_details.shipment_description
         }
 
@@ -68,7 +70,6 @@ def newshipment(
         return JSONResponse(content={"error_message": http_error.detail}, status_code=http_error.status_code)
     except Exception as e:
         # Handle other exceptions (e.g., database issues)
-        # print(e)
         return JSONResponse(content={"detail": str(e)}, status_code=500)
 
 
@@ -79,9 +80,9 @@ async def logout(request: Request):
         # Create a response object to handle logout and clear the cookie
         response = JSONResponse(content={"message": "Logged out"})
         
-        response.delete_cookie(COOKIE_NAME)  # Clear the 'access_token' cookie
+        response.delete_cookie(COOKIE_NAME)  
         
-        return response  # Return the response indicating successful logout
+        return response  
 
     except KeyError as exc:
         raise HTTPException(status_code=400, detail="Cookie name not found.") from exc

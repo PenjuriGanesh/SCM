@@ -25,7 +25,7 @@ function validateForm(event) {
     // If the form is valid, submit the form
     if (valid) {
         // Simulate a successful submission (will be handled server-side)
-        alert('Password reset request sent! Check your email for further instructions.');
+        Error('Password reset request sent! Check your email for further instructions.');
     }
 }
 
