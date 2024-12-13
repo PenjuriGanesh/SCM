@@ -22,11 +22,11 @@ def sign(request: Request):
 def sign(request: Request, username: str = Form(...), email: str = Form(...), role: str = Form("user"),
          password: str = Form(...), confirm: str = Form(...)):
     try:
-        # Check for existing user or email
+        
         existing_user = User_details.find_one({"user": username})  
         existing_email = User_details.find_one({"email": email})
 
-        # Validation checks and corresponding error messages
+        
         if existing_user:
             return html.TemplateResponse("sign_up.html", {"request": request, "error_message": "Username already used", "username": username, "email": email, "role": role})
 
@@ -46,14 +46,14 @@ def sign(request: Request, username: str = Form(...), email: str = Form(...), ro
             return html.TemplateResponse("sign_up.html", {"request": request, "error_message": "Password should be at least 7 characters long", "username": username, "email": email, "role": role})
         
 
-        # Hash the password
+        
         pw = pwd_cxt.hash(password)
         signupData = Signup(user=username, email=email, role=role, password=pw)
         User_details.insert_one(dict(signupData)) 
 
-        # Redirect to login page
+        
         return RedirectResponse(url='/login', status_code=303)
 
     except Exception as e:
-        # If an error occurs, show it to the user
+        
         return html.TemplateResponse("sign_up.html", {"request": request, "error_message": f"Internal Server Error: {str(e)}", "username": username, "email": email, "role": role})

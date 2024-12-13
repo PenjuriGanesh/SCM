@@ -20,7 +20,7 @@
           <input type="password" id="password" name="password" placeholder="Enter Password" required>
         </div>
         
-        <!-- CAPTCHA Section -->
+        
         <div class="form-input captcha">
           <label for="captcha">Enter CAPTCHA</label>
           <div class="preview" id="captchaPreview"></div>
@@ -36,10 +36,9 @@
         </div>
         <div class="form-links">
           <span>Don't have an account? <a href="signup" class="signup-link">Sign up</a></span><br>
-          <span>Forgot your password? <a href="forgetpassword" class="forgot-password-link">Forgot password</a></span>
         </div>
 
-        <!-- Error Message Display -->
+        
         {% if error_message %}
           <div class="error-message" style="color: red; margin-top: 10px;">
             {{ error_message }}

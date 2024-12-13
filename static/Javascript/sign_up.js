@@ -1,12 +1,12 @@
 function validateForm(event) {
     event.preventDefault();
     
-    // Clear any previous error messages
+    
     clearErrors();
   
     let valid = true;
   
-    // Get values from the form fields
+    
     const username = document.getElementById('username').value.trim();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -34,7 +34,7 @@ function validateForm(event) {
         valid = false;
     }
 
-    // Confirm password validation
+   
     if (confirmPassword === '') {
         document.getElementById('confirmPasswordError').textContent = 'Please confirm your password.';
         valid = false;
@@ -43,7 +43,7 @@ function validateForm(event) {
         valid = false;
     }
 
-    // Validate terms checkbox
+    
     if (!terms) {
         document.getElementById('termsError').textContent = 'You must agree to the Terms & Conditions.';
         valid = false;
@@ -55,11 +55,11 @@ function validateForm(event) {
     }
 }
 
-// Clear error messages
+
 function clearErrors() {
     document.getElementById('usernameError').textContent = '';
     document.getElementById('emailError').textContent = '';
     document.getElementById('passwordError').textContent = '';
     document.getElementById('confirmPasswordError').textContent = '';
-    document.getElementById('termsError').textContent = ''; // Error for terms & conditions
+    document.getElementById('termsError').textContent = ''; 
 }

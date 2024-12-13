@@ -64,7 +64,7 @@ body {
     font-size: 14px;
 }
 
-/* CAPTCHA section styling */
+
 .login-form .captcha {
     margin: 15px 0;
 }
@@ -172,7 +172,6 @@ body {
     text-decoration: underline;
 }
 
-/* Error alert styling */
 .form-alert {
     background-color: transparent;
     color: #721c24;
@@ -181,7 +180,7 @@ body {
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
-    display: block; /* Ensure it's displayed */
+    display: block; 
 }
 
 .alert-error {
@@ -190,7 +189,7 @@ body {
     border: 1px solid #f5c6cb;
 }
 
-/* Success alert styling (optional) */
+
 .alert-success {
     background-color: #d4edda;
     color: #155724;

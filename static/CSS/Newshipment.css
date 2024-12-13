@@ -1,4 +1,4 @@
-/* Importing Google font - Poppins */
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 
@@ -9,13 +9,12 @@ body {
     font-size: 16px;
 }
 
-/* Sidebar styles */
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    width: 85px; /* Collapsed width */
+    width: 85px; 
     display: flex;
     overflow-x: hidden;
     flex-direction: column;
@@ -25,7 +24,7 @@ body {
 }
 
 .sidebar:hover {
-    width: 260px; /* Expanded width */
+    width: 260px;
 }
 
 .sidebar .sidebar-header {
@@ -44,12 +43,12 @@ body {
     font-weight: 600;
     white-space: nowrap;
     margin-left: 23px;
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.3s; /* Fade-in transition */
+    opacity: 0; 
+    transition: opacity 0.3s; 
 }
 
 .sidebar:hover .sidebar-header h2 {
-    opacity: 1; /* Show on hover */
+    opacity: 1;
 }
 
 .sidebar-links h4 {
@@ -96,11 +95,11 @@ body {
     margin-top: 20px;
     height: 80%;
     overflow-y: auto;
-    scrollbar-width: none; /* Hide scrollbar */
+    scrollbar-width: none; 
 }
 
 .sidebar-links::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
+    display: none; 
 }
 
 .sidebar-links li a {
@@ -116,12 +115,12 @@ body {
 }
 
 .sidebar-links li a .text {
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s; /* Transition for opacity */
+    opacity: 0; 
+    transition: opacity 0.3s; 
 }
 
 .sidebar:hover .sidebar-links li a .text {
-    opacity: 1; /* Show text on hover */
+    opacity: 1; 
 }
 
 .sidebar-links li a:hover {
@@ -130,24 +129,23 @@ body {
     border-radius: 4px;
 }
 
-/* Content Section */
 .content {
-    margin-left: 100px; /* Adjust for the sidebar */
+    margin-left: 100px; 
     padding: 20px;
     flex-grow: 1;
-    transition: margin-left 0.4s; /* Smooth margin adjustment */
+    transition: margin-left 0.4s; 
 }
 
 .sidebar:hover + .content {
-    margin-left: 260px; /* Adjust content margin when sidebar is expanded */
+    margin-left: 260px; 
 }
 
 h2 {
-    text-align: center; /* Center the header text */
-    margin-bottom: 20px; /* Space below the header */
+    text-align: center; 
+    margin-bottom: 20px;
 }
 
-/* Form styles */
+
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -208,7 +206,7 @@ h2 {
     background-color: #3d47a4;
 }
 
-/* Links */
+
 h3 a {
     text-decoration: none;
     color: #4f52ba;
@@ -221,7 +219,7 @@ h3 a:hover {
 
 
 
-/* New CSS for error messages */
+
 .error-message {
     color: red;
     font-size: 14px;
@@ -232,17 +230,17 @@ h3 a:hover {
     color: red;
     font-weight: bold;
 }
-/* Add styles for response messages */
+
 #response-message {
     position: absolute;
     top: 20px;
-    left: 80%; /* Position to the right of the heading */
+    left: 80%;
     font-size: 16px;
     font-weight: bold;
     z-index: 10;
     padding: 10px;
     border-radius: 5px;
-    display: none; /* Initially hide the message */
+    display: none;
 }
 
 #response-message.green {

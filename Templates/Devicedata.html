@@ -65,12 +65,12 @@
     </aside>
 
     <div class="content">
-        <!-- Error message container at the top of the page -->
+        
         <p class="error" id="error_message" style="color: red; font-weight: bold;"></p>
 
         <h2>Device Data Stream</h2>
 
-        <!-- Dropdown for DEVICE ID - Only visible for admins -->
+        
         {% if role == "admin" %}
         <div class="device-id-container">
             <label for="device_id" class="device-id-label">DEVICE ID</label>
@@ -82,15 +82,15 @@
             </select>
             <div class="button-container">
                 <button class="nextBtn" id="submit">GET DATA</button>
-                <!-- Refresh Button -->
+                
                 <button class="nextBtn" id="refresh">REFRESH</button>
             </div>
         </div>
         {% endif %}
         
-        <!-- Check if user is an admin, and only show the table if true -->
+       
         {% if show_table %}
-            <!-- Table to display device data -->
+            
             <table id="device-data-table">
                 <thead>
                     <tr>
@@ -114,7 +114,7 @@
                 </tbody>
             </table>
         {% else %}
-            <p>No device data found. You are a regular user, and cannot view device data.</p>
+            <p>You are a normal user and do not have access to this page.</p>
         {% endif %}
 
     </div>

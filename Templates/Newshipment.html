@@ -12,15 +12,15 @@
         function checkAuthentication() {
             const token = localStorage.getItem("access_token");
             if (!token) {
-                window.location.href = "/login"; // Redirect to the login page
+                window.location.href = "/login"; 
             }
         }
 
-        // Call checkAuthentication when the page loads
+        
         checkAuthentication();
     </script>
 
-    <!-- Sidebar Section -->
+    
     <aside class="sidebar">
         <div class="sidebar-header">
             <img src="../static/Images/Exafluence.jpg" alt="logo" />
@@ -76,14 +76,14 @@
         </ul>
     </aside>
 
-    <!-- Main Content Section -->
+   
     <div class="content">
-        <!-- Error message location -->
+       
         <div id="response-message" class="hidden"></div>
 
         <h2>Create New Shipment</h2>
 
-        <!-- Shipment Form -->
+       
         <form class="form-grid" id="shipment-form" action="/newshipment_user" method="post">
             <div class="form-outline">
                 <label class="form-label" for="sinum">Shipment/Invoice Number</label>
@@ -104,9 +104,9 @@
                 <label class="form-label" for="rdetails">Route Details</label>
                 <select id="rdetails" name="route_details" class="input-field" required>
                     <option value="" disabled selected hidden>Select Route</option>
-                    <option>The English Channel</option>
-                    <option>Panama Canal</option>
-                    <option>Suez Canal</option>
+                    <option>Hyderabad</option>
+                    <option>Bangalore</option>
+                    <option>Chennai</option>
                 </select>
             </div>
 
@@ -114,11 +114,11 @@
                 <label class="form-label" for="gdtypes">Goods Type</label>
                 <select id="gdtypes" name="goods_type" class="input-field" required>
                     <option value="" disabled selected hidden>Select Good Type</option>
-                    <option>Medicals</option>
+                    <option>Pharmaceutical</option>
                     <option>Electronics</option>
-                    <option>Machinery</option>
-                    <option>Livestock</option>
-                    <option>Fuel</option>
+                    <option>E-Commerce</option>
+                    <option>Textiles</option>
+                    <option>Edibles</option>
                 </select>
             </div>
 

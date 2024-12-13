@@ -19,12 +19,12 @@ async def device_data_stream(request: Request, current_user: dict = Depends(fetc
 
     try:
         if user_role == "admin":
-            device_data = list(Device_Data_Stream.find({}, {"_id": 0}))  # Fetch device data without '_id'
+            device_data = list(Device_Data_Stream.find({}, {"_id": 0}))  
             show_table = True
         
-        return html.TemplateResponse("devicedata.html", {"request": request,"role": user_role,"device_data": device_data,"show_table": show_table})
+        return html.TemplateResponse("Devicedata.html", {"request": request,"role": user_role,"device_data": device_data,"show_table": show_table})
     except Exception as e:
-        return html.TemplateResponse("devicedata.html", {"request": request,"role": user_role,"device_data": [],"show_table": False,"error_message": f"Error: {str(e)}"})
+        return html.TemplateResponse("Devicedata.html", {"request": request,"role": user_role,"device_data": [],"show_table": False,"error_message": f"Error: {str(e)}"})
 
 @app.post("/devicedata-fetch")
 async def fetch_device_data(request: Request):
@@ -48,7 +48,7 @@ COOKIE_NAME = "access_token"
 @app.post("/logout")
 async def logout(request: Request):
     try:
-        # Create a response object to handle logout and clear the cookie
+        
         response = JSONResponse(content={"message": "Logged out"})
         
         response.delete_cookie(COOKIE_NAME)  

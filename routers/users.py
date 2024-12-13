@@ -1,13 +1,15 @@
-from fastapi import APIRouter, Request, Depends, HTTPException
+from fastapi import APIRouter, Request, Depends, Form, HTTPException, Body
+from fastapi.responses import RedirectResponse, JSONResponse
+from config.config import User_details
+from routers.dashboard import fetch_user_from_cookie
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
-from config.config import User_details  # Import User_details from config
-from routers.dashboard import fetch_user_from_cookie
 
 app = APIRouter()
 html = Jinja2Templates(directory="Templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
 
 @app.get("/users")
 def admin_page(request: Request, current_user: dict = Depends(fetch_user_from_cookie)):
@@ -15,35 +17,71 @@ def admin_page(request: Request, current_user: dict = Depends(fetch_user_from_co
         return RedirectResponse(url="/login?alert=true")
 
     try:
-        # Fetch all user details from User_details collection
+
         if current_user.get("role") == "admin":
-            users = list(User_details.find({}, {"_id": 0}))  # Fetch all fields except _id
+            users = list(User_details.find({}, {"_id": 0}))  
+        elif current_user.get("role") == "user":
+            
+            return html.TemplateResponse("Users.html", {"request": request, "user_details": [], "error_message": "You are a normal user and do not have access to this page."})
         else:
-            # If the current user is not an admin, restrict access
             return RedirectResponse(url="/dashboard?alert=unauthorized")
 
-        # Pass the fetched data to the template
-        return html.TemplateResponse(
-            "Users.html",
-            {"request": request, "user_details": users},
-        )
+        
+        return html.TemplateResponse("Users.html", {"request": request, "user_details": users})
 
     except Exception as e:
-        return html.TemplateResponse(
-            "Users.html",
-            {"request": request, "user_details": [], "error_message": str(e)},
-        )
+        return html.TemplateResponse("Users.html", {"request": request, "user_details": [], "error_message": str(e)})
+
+
+@app.put("/update_user")
+async def update_user(
+    request: Request,
+    data: dict = Body(...), 
+    current_user: dict = Depends(fetch_user_from_cookie)
+):
+    if current_user is None:
+        return JSONResponse(status_code=400, content={"detail": "User not logged in."})
+
+    try:
+        if current_user.get("role") != "admin":
+            return JSONResponse(status_code=403, content={"detail": "Unauthorized."})
+
+        user = data.get("user")
+        role = data.get("role")
+
+        
+        user_to_update = User_details.find_one({"user": user})
+
+        if user_to_update:
+            
+            result = User_details.update_one(
+                {"user": user},  
+                {"$set": {"role": role}}  
+            )
+
+            if result.matched_count > 0:
+                return JSONResponse(status_code=200, content={"detail": "User updated successfully!"})
+            else:
+                return JSONResponse(status_code=404, content={"detail": "User not found or no changes made."})
+        else:
+            return JSONResponse(status_code=404, content={"detail": "User not found."})
+
+    except Exception as e:
+        
+        return JSONResponse(status_code=500, content={"detail": str(e)})
+
 
 COOKIE_NAME = "access_token"
+
+
 @app.post("/logout")
 async def logout(request: Request):
     try:
-        # Create a response object to handle logout and clear the cookie
-        response = RedirectResponse(url="/login?alert=loggedout")
+        
+        response = JSONResponse(content={"message": "Logged out"})
         response.delete_cookie(COOKIE_NAME, path="/", domain=None)
         return response
-
     except KeyError as exc:
         raise HTTPException(status_code=400, detail="Cookie name not found.") from exc
     except Exception as exception:
-        raise HTTPException(status_code=500, detail=str(exception)) from exception
+        raise HTTPException(status_code=500, detail=str(exception))

@@ -11,15 +11,15 @@
         <div class="form-container">
             <h2>Signup</h2>
             
-            <!-- Display error message if any -->
+            
             {% if error_message %}
                 <div class="error" id="error_message">{{ error_message }}</div>
             {% endif %}
 
-            <!-- Signup form -->
+            
             <form id="signupForm" method="POST" action="/signup">
                 <label for="username">Username:</label> 
-                 <!--form element by matching the value of for with the id of the input element -->
+                 
                 <input type="text" id="username" name="username" value="{{ username }}" required>
                 <div class="error" id="usernameError"></div>
 
@@ -43,7 +43,7 @@
                     </label>
                 </div>
 
-                <!-- Submit button -->
+                
                 <button type="submit">Create Account</button>
 
                 <div class="login-link">

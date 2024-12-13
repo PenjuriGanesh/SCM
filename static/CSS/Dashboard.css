@@ -1,4 +1,4 @@
-/* Importing Google font - Poppins */
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
@@ -13,7 +13,7 @@ body {
     background: url('/static/Images/6181729.jpg') no-repeat center center fixed;
     background-size: cover; 
     display: flex;
-    transition: background-size 0.4s ease; /* Smooth transition for background size */
+    transition: background-size 0.4s ease; 
     overflow: hidden;
     flex-direction: column; 
     position: relative; 
@@ -23,10 +23,10 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1; /* Ensure canvas stays behind other elements */
+    z-index: -1; 
     width: 100%;
     height: 100%;
-    background: transparent; /* Set canvas background to transparent */
+    background: transparent; 
 }
 
 .navbar {
@@ -69,13 +69,13 @@ body {
     cursor: pointer;
 }
 
-/* Sidebar and content styles */
+
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    width: 85px; /* Collapsed width */
+    width: 85px; 
     display: flex;
     overflow-x: hidden;
     flex-direction: column;
@@ -85,7 +85,7 @@ body {
 }
 
 .sidebar:hover {
-    width: 260px; /* Expanded width */
+    width: 260px;
 }
 
 .sidebar .sidebar-header {
@@ -104,12 +104,12 @@ body {
     font-weight: 600;
     white-space: nowrap;
     margin-left: 23px;
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.3s; /* Fade-in transition */
+    opacity: 0; 
+    transition: opacity 0.3s; 
 }
 
 .sidebar:hover .sidebar-header h2 {
-    opacity: 1; /* Show on hover */
+    opacity: 1; 
 }
 
 .sidebar-links h4 {
@@ -151,11 +151,11 @@ body {
     margin-top: 20px;
     height: 80%;
     overflow-y: auto;
-    scrollbar-width: none; /* Hide scrollbar */
+    scrollbar-width: none; 
 }
 
 .sidebar-links::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
+    display: none;
 }
 
 .sidebar-links li a {
@@ -171,12 +171,12 @@ body {
 }
 
 .sidebar-links li a .text {
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s; /* Transition for opacity */
+    opacity: 0; 
+    transition: opacity 0.3s;
 }
 
 .sidebar:hover .sidebar-links li a .text {
-    opacity: 1; /* Show text on hover */
+    opacity: 1; 
 }
 
 .sidebar-links li a:hover {
@@ -186,32 +186,32 @@ body {
 }
 
 .sidebar-links li a.active {
-    background-color: #fff; /* Change background for active link */
-    color: #161a2d; /* Change text color for active link */
-    border-radius: 4px; /* Ensure the active link has rounded corners */
+    background-color: #fff; 
+    color: #161a2d; 
+    border-radius: 4px; 
 }
 
 .content {
-    margin-left: 100px; /* Adjust for the sidebar */
+    margin-left: 100px;
     padding: 20px;
     flex-grow: 1;
-    transition: margin-left 0.4s; /* Smooth margin adjustment */
-    position: relative; /* For positioning the canvas */
-    height: 100vh; /* Ensure content takes full height */
-    display: flex; /* Use Flexbox to manage layout */
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
+    transition: margin-left 0.4s; 
+    position: relative;
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
 }
 
 .sidebar:hover + .content {
-    margin-left: 260px; /* Adjust content margin when sidebar is expanded */
+    margin-left: 260px;
 }
 
 h2 {
-    margin-bottom: 20px; /* Space below the header */
-    text-align: center; /* Center the header text */
-    color: white; /* Header text color */
+    margin-bottom: 20px; 
+    text-align: center; 
+    color: white;
 }
 
 .action-button {
@@ -223,15 +223,15 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    display: inline-flex; /* Inline flexbox for buttons */
-    align-items: center; /* Align text vertically in button */
-    justify-content: center; /* Center content horizontally inside button */
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
 }
 
 .button-container {
-    display: flex; /* Use Flexbox to align buttons */
-    justify-content: space-between; /* Space buttons equally with max space between them */
-    gap: 20px; /* Space between buttons (optional, you can remove or adjust this) */
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px;
     width: 30%; 
 }
 
@@ -240,16 +240,16 @@ h2 {
 }
 
 .connections {
-    background-color: rgba(22, 26, 45, 0.8); /* Match sidebar background color with transparency */
-    color: white; /* Text color */
+    background-color: rgba(22, 26, 45, 0.8);
+    color: white;
     padding: 20px;
     border-radius: 10px;
-    width: 100%; /* Full width */
-    margin-top: 20px; /* Space above */
-    text-align: center; /* Centered text */
+    width: 100%; 
+    margin-top: 20px;
+    text-align: center;
 }
 
-/* Responsive Styles */
+
 @media (max-width: 768px) {
     .navbar .menu {
         display: none;
@@ -272,15 +272,15 @@ h2 {
     }
 
     .content1 {
-        margin-left: 100px; /* Adjust for the sidebar */
+        margin-left: 100px; 
         padding: 20px;
         flex-grow: 1;
         transition: margin-left 0.4s; 
-        position: relative; /* For positioning the canvas */
-        height: 100vh; /* Ensure content takes full height */
-        display: flex; /* Use Flexbox to manage layout */
-        flex-direction: horizontal; /* Stack elements vertically */
-        align-items: center; /* Center horizontally */
-        justify-content: center; /* Center vertically */
+        position: relative; 
+        height: 100vh; 
+        display: flex;
+        flex-direction: horizontal; 
+        align-items: center;
+        justify-content: center;
     }
 }

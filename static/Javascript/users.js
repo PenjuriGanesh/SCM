@@ -1,21 +1,77 @@
-// Function to handle the logout
+function openModal(username, email, role) {
+    // Set the values of the form inputs
+    document.getElementById('user').value = username;  
+    document.getElementById('username').value = username;  
+    document.getElementById('email').value = email; 
+    document.getElementById('role').value = role;  
+
+    
+    document.getElementById('editModal').style.display = 'block';
+}
+
+
+function closeModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+
+
+async function updateUser(event) {
+    event.preventDefault(); 
+
+    const user = document.getElementById('user').value;
+    const role = document.getElementById('role').value;
+
+    try {
+        const response = await fetch('/update_user', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user, role }),
+        });
+
+        const data = await response.json(); 
+
+        const messageDiv = document.getElementById('message');
+        
+        if (response.ok) {
+            
+            messageDiv.textContent = data.detail;  
+            messageDiv.className = 'message success'; 
+            messageDiv.style.display = 'block';  
+            closeModal();
+        } else {
+
+            messageDiv.textContent = "Error updating user: " + data.detail; 
+            messageDiv.className = 'message error';  
+            messageDiv.style.display = 'block';  
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        const messageDiv = document.getElementById('message');
+        messageDiv.textContent = "An error occurred while updating the user.";  
+        messageDiv.className = 'message error';  
+        messageDiv.style.display = 'block';  
+    }
+}
+
 function logout(event) {
-    event.preventDefault();  // Prevent the default behavior (like page redirect)
+    event.preventDefault();  
   
-    // Remove the JWT token from localStorage
     localStorage.removeItem("access_token");
   
-    // Send a request to the backend to delete the cookie
+    
     fetch("/logout", {
-        method: "POST",  // Make a POST request to the /logout endpoint
-        credentials: "same-origin",  // Ensure cookies are sent with the request
+        method: "POST", 
+        credentials: "same-origin",  
         headers: {
-            "Content-Type": "application/json"  // Ensure the request is in JSON format
+            "Content-Type": "application/json"  
         }
     })
     .then(response => {
         if (response.ok) {
-            // If logout is successful, redirect to login page
+           
             window.location.href = "/login";
         } else {
             throw new Error("Logout failed");

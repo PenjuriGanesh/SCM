@@ -9,7 +9,6 @@ from config.config import User_details
 app = APIRouter()
 html = Jinja2Templates(directory="Templates")
 
-# Password context for hashing and verifying passwords
 pwd_cxt = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -22,26 +21,26 @@ def login(request: Request):
 @app.post("/login")
 async def login(request: Request, form_data: OAuth2PasswordRequestForm = Depends()):
     try:
-        # Check if the user exists in the database
+       
         user_data = User_details.find_one({"user": form_data.username})
         
         if not user_data:
-            # If the username is not found
+            
             return JSONResponse(content={"detail": "Username not found."}, status_code=404)
         
-        # Verify password if username exists
+        
         if not pwd_cxt.verify(form_data.password, user_data["password"]):
-            # If the password doesn't match
+            
             return JSONResponse(content={"detail": "Incorrect password."}, status_code=401)
         
-        # If authentication is successful, create JWT token
+        
         token = create_access_token(data={
             "username": user_data["user"],
             "email": user_data["email"],
             "role": user_data["role"]
         })
         
-        response_content = {  # Structure the response data
+        response_content = {  
             "access_token": token,
             "username": user_data["user"],
             "email": user_data["email"],
@@ -52,8 +51,8 @@ async def login(request: Request, form_data: OAuth2PasswordRequestForm = Depends
         response.set_cookie(
             key="access_token",
             value=f"Bearer {token}",
-            httponly=True,    # Prevent access via JavaScript (XSS protection)
-            samesite="Strict" # Protect against CSRF(Cross-Site Request Forgery)
+            httponly=True,   
+            samesite="Strict"
         )
         return response
         

@@ -1,4 +1,4 @@
-/* Importing Google font - Poppins */
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
@@ -26,7 +26,7 @@ body {
     background: transparent;
 }
 
-/* Sidebar */
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -114,7 +114,6 @@ body {
     border-radius: 4px;
 }
 
-/* Content Section */
 .content {
     margin-left: 100px;
     padding: 20px;
@@ -148,7 +147,7 @@ body {
     text-align: center;
 }
 
-/* Account Info */
+
 .account-info {
     width: 100%;
     display: flex;
@@ -178,7 +177,7 @@ body {
     font-weight: 600;
 }
 
-/* Input Containers */
+
 .input-container {
     margin-top: 10px;
     width: 100%;
@@ -191,15 +190,15 @@ body {
     font-size: 1rem;
     color: #ddd;
     margin-bottom: 5px;
-    text-align: left; /* Label aligned to the left */
+    text-align: left; 
     width: 100%;
 }
 
 .input-container input {
     font-size: 1rem;
-    padding: 15px 20px; /* Further increased padding */
-    width: 100%; /* Set input width to 100% */
-    margin-bottom: 15px; /* Increased margin for spacing */
+    padding: 15px 20px;
+    width: 100%; 
+    margin-bottom: 15px; 
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -207,7 +206,6 @@ body {
     margin-right: auto;
 }
 
-/* Button Container (Centering logout button) */
 .button-container {
     margin-top: 20px;
     display: flex;
@@ -219,7 +217,7 @@ body {
 .action-button {
     background-color: #242841;
     color: white;
-    padding: 12px 25px; /* Adjusted padding */
+    padding: 12px 25px; 
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -231,7 +229,6 @@ body {
     background-color: #1e2b38;
 }
 
-/* Responsive Design for smaller screens */
 @media (max-width: 768px) {
     .account-container {
         width: 90%;
@@ -248,10 +245,10 @@ body {
     }
 
     .input-container input {
-        width: 100%; /* Make input fields full width on small screens */
-    }
+        width: 100%; 
 
     .action-button {
-        width: 100%; /* Make logout button full width */
+        width: 100%; 
     }
+}
 }

@@ -1,4 +1,4 @@
-# Fetches the image of Python 
+# Use the official Python runtime as a parent image
 FROM python:3.12.7
 
 # Set the working directory inside the container to /app

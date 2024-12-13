@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get the response message element
+
     const responseMessage = document.getElementById('response-message');
 
-    // Event listener for form submission
-    document.getElementById('shipment-form').addEventListener('submit', function(event) {
-        event.preventDefault();  // Prevents the default form submission
 
-        // Collect the form data 
+    document.getElementById('shipment-form').addEventListener('submit', function(event) {
+        event.preventDefault();  
+
+
         const formData = {
             shipment_number: parseInt(document.getElementById('sinum').value),
             container_number: parseInt(document.getElementById('cnum').value),
@@ -22,13 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
             shipment_description: document.getElementById('sdesc').value
         };
 
-        // Validate that shipment number, container number, PO number, and batch ID are exactly 7 digits
+      
         if (formData.shipment_number.toString().length !== 7) {
             responseMessage.textContent = "Shipment number must be exactly 7 digits.";
-            responseMessage.classList.remove("green"); // Remove any green class (success)
-            responseMessage.classList.add("red"); // Add red class (error)
-            responseMessage.style.display = "block"; // Display the error message
-            return; // Prevent form submission
+            responseMessage.classList.remove("green");
+            responseMessage.classList.add("red");
+            responseMessage.style.display = "block"; 
+            return; 
         }
 
         if (formData.container_number.toString().length !== 7) {
@@ -55,19 +55,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return; 
         }
 
-        // Hide any error message if validation passes
+        
         responseMessage.style.display = "none";
 
         const token = localStorage.getItem("access_token");
         
-        // Send the data to the backend using fetch API
+        
         fetch("/newshipment_user", {
             method: "POST",
             headers: {
-                'Authorization': `Bearer ${token}`,  // Add token in Authorization header
-                'Content-Type': 'application/json'   // Set Content-Type to JSON
+                'Authorization': `Bearer ${token}`, 
+                'Content-Type': 'application/json'  
             },
-            body: JSON.stringify(formData)  // Send the data as JSON
+            body: JSON.stringify(formData)  
         })
         .then(async (response) => {
             if (response.ok) {
@@ -94,31 +94,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Event listener for the cancel button
+    
     document.getElementById('canbtn').addEventListener('click', function(event) {
-        event.preventDefault();  // Prevent default behavior of the button (if it's a submit)
+        event.preventDefault();  
         document.getElementById('shipment-form').reset();  
         responseMessage.style.display = "none"; 
     });
 });
 
-// Logout function
-function logout(event) {
-    event.preventDefault();  // Prevent the default behavior (like page redirect)
 
+function logout(event) {
+    event.preventDefault();  
     localStorage.removeItem("access_token");
 
-    // Send a request to the backend to delete the cookie
+    
     fetch("/logout", {
         method: "POST", 
-        credentials: "same-origin",  // Ensure cookies are sent with the request
+        credentials: "same-origin",  
         headers: {
-            "Content-Type": "application/json"  // Ensure the request is in JSON format
+            "Content-Type": "application/json" 
         }
     })
     .then(response => {
         if (response.ok) {
-            // If logout is successful, redirect to login page
+            
             window.location.href = "/login";
         } else {
             throw new Error("Logout failed");

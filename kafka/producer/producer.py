@@ -10,16 +10,16 @@ Port = int(os.getenv("PORT"))
  
 
 try:
-    # Establish socket connection to server
+   
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.connect(('127.0.0.1', Port)) 
+    server.connect((Host, Port)) 
     server.settimeout(10)
     print(f"Connected to server at {Host}:{Port}")
  
-    # Configure Kafka producer
+    
     producer = Producer({"bootstrap.servers": bootstrap_servers})
  
-    # Function to send message to Kafka topic
+    
     def send_message(topic, message):
         try:
             producer.produce(topic, value=json.dumps(message))
@@ -28,7 +28,6 @@ try:
         except Exception as kafka_error:
             print(f"Error sending message to Kafka: {kafka_error}")
  
-    # Receive messages from socket and send to Kafka
     while True:
         try:
             message = server.recv(1024).decode('utf-8')

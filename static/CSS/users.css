@@ -1,4 +1,3 @@
-/* Importing Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
@@ -19,7 +18,7 @@ body {
     top: 0;
     left: 0;
     height: 100%;
-    width: 85px; /* Collapsed width */
+    width: 85px;
     display: flex;
     overflow-x: hidden;
     flex-direction: column;
@@ -29,7 +28,7 @@ body {
 }
 
 .sidebar:hover {
-    width: 260px; /* Expanded width */
+    width: 260px; 
 }
 
 .sidebar .sidebar-header {
@@ -48,12 +47,12 @@ body {
     font-weight: 600;
     white-space: nowrap;
     margin-left: 23px;
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.3s; /* Fade-in transition */
+    opacity: 0;
+    transition: opacity 0.3s; 
 }
 
 .sidebar:hover .sidebar-header h2 {
-    opacity: 1; /* Show on hover */
+    opacity: 1; 
 }
 
 .sidebar-links h4 {
@@ -95,11 +94,11 @@ body {
     margin-top: 20px;
     height: 80%;
     overflow-y: auto;
-    scrollbar-width: none; /* Hide scrollbar */
+    scrollbar-width: none; 
 }
 
 .sidebar-links::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
+    display: none; 
 }
 
 .sidebar-links li a {
@@ -115,12 +114,12 @@ body {
 }
 
 .sidebar-links li a .text {
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s; /* Transition for opacity */
+    opacity: 0; 
+    transition: opacity 0.3s; 
 }
 
 .sidebar:hover .sidebar-links li a .text {
-    opacity: 1; /* Show text on hover */
+    opacity: 1; 
 }
 
 .sidebar-links li a:hover {
@@ -130,19 +129,19 @@ body {
 }
 
 .content {
-    margin-left: 100px; /* Adjust for the sidebar */
+    margin-left: 100px;
     padding: 20px;
     flex-grow: 1;
-    transition: margin-left 0.4s; /* Smooth margin adjustment */
+    transition: margin-left 0.4s; 
 }
 
 .sidebar:hover + .content {
-    margin-left: 260px; /* Adjust content margin when sidebar is expanded */
+    margin-left: 260px;
 }
 
 h2 {
-    text-align: center; /* Center the header text */
-    margin-bottom: 20px; /* Space below the header */
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 table {
@@ -150,8 +149,8 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px; /* Add rounded corners to the table */
-    overflow: hidden; /* Ensures rounded corners are applied */
+    border-radius: 5px; 
+    overflow: hidden; 
 }
 
 th, td {
@@ -166,4 +165,84 @@ th {
 
 tr:hover {
     background-color: #dfe6e9;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 400px;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.close-btn {
+    align-self: flex-end;
+    cursor: pointer;
+    font-size: 24px;
+    color: #888;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4f52ba;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3c41a1;
+}
+
+
+.message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: none; 
+}
+
+.message.success {
+    background-color: #28a745;
+    color: white;
+}
+
+.message.error {
+    background-color: #dc3545;
+    color: white;
 }

@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <!-- Canvas element -->
+
     <canvas id="canvas"></canvas>
 
-    <!-- Sidebar -->
+   
     <aside class="sidebar">
         <div class="sidebar-header">
             <img src="../static/Images/Exafluence.jpg" alt="logo" />
@@ -84,25 +84,25 @@
 
         const token = localStorage.getItem("access_token");
     
-        // Decode the JWT token and extract user data.Extract without backend call
+       
         function decodeToken(token) {
-            const base64Url = token.split('.')[1]; // header
+            const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {  //atob is used for convert base64 to normal string
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); // hexadecimal representation
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {  
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); 
             }).join(''));
     
-            return JSON.parse(jsonPayload); // Parse JSON into an object
+            return JSON.parse(jsonPayload); 
         }
     
-        // Decode the token and get the user's name
+        
         const user = decodeToken(token);
         const userName = user.username || "User"; 
     
         
         document.getElementById('welcome-message').innerText = `Hey ${userName}, welcome to SCMXpertLite — where amazing things happen! 🚀`;
     
-        // Function to set the Authorization header for any API requests
+        
         function getAuthHeaders() {
             return {
                 'Authorization': `Bearer ${token}`,  
@@ -122,23 +122,23 @@
     
         
         function logout(event) {
-            event.preventDefault();  // Prevent the default behavior (like page redirect)
+            event.preventDefault();  
     
-            // Remove the JWT token from localStorage
+            
             localStorage.removeItem("access_token");
     
-            // Send a request to the backend to delete the cookie
+
             fetch("/logout", {
                 method: "POST",  
-                credentials: "same-origin",  // Ensure cookies are sent with the request
+                credentials: "same-origin", 
                 headers: {
-                    "Content-Type": "application/json"  // Ensure the request is in JSON format
+                    "Content-Type": "application/json"  
                 }
             })
             .then(response => {
                 
                 if (response.ok) {
-                    // If logout is successful, redirect to login page
+                    
                     window.location.href = "/login";
                 } else {
                     throw new Error("Logout failed");

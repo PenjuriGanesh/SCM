@@ -1,19 +1,18 @@
-// JavaScript for the Canvas Stars Animation
 var canvas = document.getElementById("canvas"),
     ctx = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-var stars = [], // Array that contains the stars
-    FPS = 60, // Frames per second
-    x = 100, // Number of stars
+var stars = [], 
+    FPS = 60, 
+    x = 100, 
     mouse = {
         x: 0,
         y: 0
-    };  // mouse location
+    };  
 
-// Push stars to array
+
 for (var i = 0; i < x; i++) {
     stars.push({
         x: Math.random() * canvas.width,
@@ -24,7 +23,7 @@ for (var i = 0; i < x; i++) {
     });
 }
 
-// Draw the scene
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -71,7 +70,7 @@ function distance(point1, point2) {
     return Math.sqrt(xs + ys);
 }
 
-// Update star locations
+
 function update() {
     for (var i = 0, x = stars.length; i < x; i++) {
         var s = stars[i];
@@ -89,7 +88,7 @@ canvas.addEventListener('mousemove', function(e) {
     mouse.y = e.clientY;
 });
 
-// Update and draw
+
 function tick() {
     draw();
     update();

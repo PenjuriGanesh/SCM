@@ -17,15 +17,14 @@ try:
     while True:
         try:
             data = []
-            for _ in range(2):  # Generate 2 random device entries each time
+            for _ in range(2):  
                 route_from = random.choice(routes)
                 route_to = random.choice(routes)
  
-                # Ensure `Route_From` and `Route_To` are different
                 while route_from == route_to:
                     route_to = random.choice(routes)
  
-                # Generate random data
+                
                 device_data = {
                     "Battery_Level": round(random.uniform(2.00, 5.00), 2),
                     "Device_Id": random.randint(1156053075, 1156053080),
@@ -35,7 +34,7 @@ try:
                 }
                 data.append(device_data)
  
-            # Send data to client
+         
             userdata = (json.dumps(data) + "\n").encode('utf-8')
             c.send(userdata)
             print(f"Sent data: {userdata.decode('utf-8')}")

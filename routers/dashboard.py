@@ -12,7 +12,6 @@ app.mount("/static", StaticFiles(directory= "static"), name = "static")
 
 def fetch_user_from_cookie(request: Request) -> Signup:
     token = request.cookies.get("access_token")
-    # print("tokentoken",token)
     user = decode_token(token)
     return user
 
@@ -20,16 +19,16 @@ def fetch_user_from_cookie(request: Request) -> Signup:
 def dashboard(request: Request, current_user: dict = Depends(fetch_user_from_cookie)):
     try:
         if current_user is None:
-            # Redirect to login with alert parameter
+           
             return RedirectResponse(url="/login?alert=true")
         
-        # If authenticated, render the dashboard page
+        
         return html.TemplateResponse("Dashboard.html", {"request": request})
     except HTTPException as http_exc:
-        # Return JSON response for known HTTP exceptions
+        
         return JSONResponse(status_code=http_exc.status_code, content={"detail": http_exc.detail})
     except Exception as e:
-        # Handle unexpected errors
+        
         return JSONResponse(status_code=500,content={"detail": f"An unexpected error occurred: {str(e)}"})
 
 
@@ -38,9 +37,8 @@ COOKIE_NAME = "access_token"
 @app.post("/logout")
 async def logout(request: Request):
     try:
-        # Create a response object to handle logout and clear the cookie
+       
         response = JSONResponse(content={"message": "Logged out"})
-        
         response.delete_cookie(COOKIE_NAME)  
         return response  
 

@@ -15,7 +15,7 @@ async def account(request: Request, user: dict = Depends(fetch_user_from_cookie)
         if not user:
             return RedirectResponse(url="/login?alert=true")
 
-        # Extract username and email from the user data
+       
         username = user.get("user") 
         email = user.get("email")
 
@@ -35,7 +35,7 @@ COOKIE_NAME = "access_token"
 @app.post("/logout")
 async def logout(request: Request):
     try:
-        # Create a response object to handle logout and clear the cookie
+       
         response = JSONResponse(content={"message": "Logged out"})
         response.delete_cookie(COOKIE_NAME)  
         return response 

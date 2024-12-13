@@ -2,8 +2,8 @@ version: '3.12.7'
  
 services:
  
-  SCM:
-    image: app:latest
+  scm:
+    image: ganesh724/app:latest
     ports:
       - "8000:8000"
   zookeeper:
@@ -11,7 +11,7 @@ services:
     ports:
       - "2181:2181"
     depends_on:
-      - SCM
+      - scm
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
  
@@ -27,18 +27,18 @@ services:
       - zookeeper
  
   servers:
-    image: sever:latest
+    image: ganesh724/server:latest
     ports:
       - "12345:12345"
     depends_on:
       - kafka
  
   producer:
-    image: producer:latest
+    image: ganesh724/producer:latest
     depends_on:
       - servers
  
   consumer:
-    image: consumer:latest
+    image: ganesh724/consumer:latest
     depends_on:
       - producer

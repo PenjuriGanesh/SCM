@@ -1,4 +1,4 @@
-/* Importing Google font - Poppins */
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
@@ -19,7 +19,7 @@ body {
     top: 0;
     left: 0;
     height: 100%;
-    width: 85px; /* Collapsed width */
+    width: 85px; 
     display: flex;
     overflow-x: hidden;
     flex-direction: column;
@@ -29,7 +29,7 @@ body {
 }
 
 .sidebar:hover {
-    width: 260px; /* Expanded width */
+    width: 260px; 
 }
 
 .sidebar .sidebar-header {
@@ -48,12 +48,12 @@ body {
     font-weight: 600;
     white-space: nowrap;
     margin-left: 23px;
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.3s; /* Fade-in transition */
+    opacity: 0; 
+    transition: opacity 0.3s; 
 }
 
 .sidebar:hover .sidebar-header h2 {
-    opacity: 1; /* Show on hover */
+    opacity: 1; 
 }
 
 .sidebar-links h4 {
@@ -95,11 +95,11 @@ body {
     margin-top: 20px;
     height: 80%;
     overflow-y: auto;
-    scrollbar-width: none; /* Hide scrollbar */
+    scrollbar-width: none; 
 }
 
 .sidebar-links::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
+    display: none; 
 }
 
 .sidebar-links li a {
@@ -115,12 +115,12 @@ body {
 }
 
 .sidebar-links li a .text {
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s; /* Transition for opacity */
+    opacity: 0; 
+    transition: opacity 0.3s;
 }
 
 .sidebar:hover .sidebar-links li a .text {
-    opacity: 1; /* Show text on hover */
+    opacity: 1; 
 }
 
 .sidebar-links li a:hover {
@@ -130,19 +130,19 @@ body {
 }
 
 .content {
-    margin-left: 100px; /* Adjust for the sidebar */
+    margin-left: 100px;
     padding: 20px;
     flex-grow: 1;
-    transition: margin-left 0.4s; /* Smooth margin adjustment */
+    transition: margin-left 0.4s;
 }
 
 .sidebar:hover + .content {
-    margin-left: 260px; /* Adjust content margin when sidebar is expanded */
+    margin-left: 260px; 
 }
 
 h2 {
-    text-align: center; /* Center the header text */
-    margin-bottom: 20px; /* Space below the header */
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 table {
@@ -150,15 +150,15 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px; /* Add rounded corners to the table */
-    overflow: hidden; /* Ensures rounded corners are applied */
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 th, td {
     border: 1px solid #ddd;
     padding: 15px;
     text-align: left;
-    vertical-align: middle; /* Aligns content vertically */
+    vertical-align: middle; 
 }
 
 th {
@@ -214,33 +214,33 @@ tr:hover {
 
 .device-id-label {
     font-size: 18px;
-    color: #080808; /* A bright yellow color */
+    color: #080808;
     margin-bottom: 10px;
 }
 
 .device-id-dropdown {
     padding: 10px;
     font-size: 16px;
-    border: 2px solid #f3f025; /* Yellow border */
-    background-color: #2b2b2b; /* Dark background for contrast */
-    color: white; /* White text */
+    border: 2px solid #f3f025;
+    background-color: #2b2b2b; 
+    color: white;
     border-radius: 5px;
     width: 200px;
 }
 
 .device-id-dropdown option {
-    background-color: #2b2b2b; /* Dark background for dropdown options */
+    background-color: #2b2b2b;
     color: white;
 }
 
 .device-id-dropdown:focus {
     outline: none;
-    border-color: #ff9800; /* Orange color on focus */
+    border-color: #ff9800; 
 }
 
 .nextBtn {
     padding: 10px 20px;
-    background-color: #3f0097; /* Purple background */
+    background-color: #3f0097;
     color: white;
     border: none;
     border-radius: 5px;
@@ -249,5 +249,5 @@ tr:hover {
 }
 
 .nextBtn:hover {
-    background-color: #6a1b9a; /* Darker purple on hover */
+    background-color: #6a1b9a;
 }
