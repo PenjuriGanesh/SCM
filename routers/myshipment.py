@@ -23,7 +23,7 @@ def my_shipments(request: Request, current_user: dict = Depends(fetch_user_from_
 
         if role == "admin":
             
-            shipments = list(Shipments.find({},  {"_id": 0}, ))
+            shipments = list(Shipments.find({},  {"_id": 0},))
         else:
            
             if not email:

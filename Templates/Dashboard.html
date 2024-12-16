@@ -88,7 +88,7 @@
         function decodeToken(token) {
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {  
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {  //atob is used to convert base64 into string
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); 
             }).join(''));
     
@@ -130,7 +130,7 @@
 
             fetch("/logout", {
                 method: "POST",  
-                credentials: "same-origin", 
+                credentials: "same-origin",  // Ensures cookies and credentials are included same origin 
                 headers: {
                     "Content-Type": "application/json"  
                 }

@@ -5,7 +5,7 @@ import json, random, socket, time
 try:
     s = socket.socket()
     print("Socket Created")
-    s.bind(('0.0.0.0', 12345))
+    s.bind(('', 12345))
     s.listen(3)
     print("Waiting for connections")
     c, addr = s.accept()

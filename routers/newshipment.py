@@ -26,7 +26,7 @@ def newshipment(
     token: str = Depends(oauth2_scheme),
 ):
     try:
-        # Validate all fields
+        
         if any(
             value == ""
             for value in [
@@ -46,14 +46,14 @@ def newshipment(
         ):
             raise HTTPException(status_code=400, detail="All fields must be filled")
 
-        # Check for existing shipment
+        
         existing_data = Shipments.find_one(
             {"shipment_number": shipment_details.shipment_number}, {"_id": 0}
         )
         if existing_data:
             raise HTTPException(status_code=400, detail="Shipment number already exists")
 
-        # Decode token and create shipment data
+        
         decoded_token = decode_token(token)
 
         shipment_data = {
@@ -73,7 +73,7 @@ def newshipment(
             "shipment_description": shipment_details.shipment_description,
         }
 
-        # Insert shipment data
+        
         Shipments.insert_one(shipment_data)
 
         return JSONResponse(
@@ -90,8 +90,6 @@ def newshipment(
 
 
 COOKIE_NAME = "access_token"
-
-
 @app.post("/logout")
 async def logout(request: Request):
     try:
