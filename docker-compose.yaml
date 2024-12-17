@@ -1,4 +1,4 @@
-version: '3.12.7'
+version: '3.12'
  
 services:
  
@@ -34,11 +34,19 @@ services:
       - kafka
  
   producer:
-    image: ganesh724/producer:latest
+    build: ./kafka/producer
+    # image: ganesh724/producer:latest
+    # environment:
+    #   - BOOTSTRAP_SERVERS =kafka:9092
     depends_on:
       - servers
+      - kafka
  
   consumer:
-    image: ganesh724/consumer:latest
+    build: ./kafka/consumer
+    # image: ganesh724/consumer:latest
+    # environment:
+    #   - BOOTSTRAP_SERVERS =kafka:9092
     depends_on:
       - producer
+      - kafka

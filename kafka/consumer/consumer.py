@@ -8,6 +8,7 @@ from pymongo.database import Database
 load_dotenv(dotenv_path=".env")
  
 
+bootstrap_servers = os.getenv("BOOTSTRAP_SERVERS")
 connection_string = os.getenv("MONGODB_URI")
 database_name = os.getenv("MONGODB_DATABASE")
  
@@ -20,7 +21,8 @@ database = client[database_name]
 device_data_stream1= database["Device_Data_Stream"]
  
 
-bootstrap_servers = os.getenv("BOOTSTRAP_SERVERS")
+print("Hi")
+print(bootstrap_servers)
 if not bootstrap_servers:
     raise ValueError("Kafka bootstrap servers are not set in .env")
  
