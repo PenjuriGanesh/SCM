@@ -7,6 +7,11 @@ load_dotenv()
 bootstrap_servers = os.getenv("BOOTSTRAP_SERVERS")
 Host = os.getenv("HOST")
 Port = int(os.getenv("PORT"))
+
+print("Hi")
+print(bootstrap_servers)
+print(Host)
+print(Port)
  
 
 try:
