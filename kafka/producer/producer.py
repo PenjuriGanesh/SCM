@@ -12,9 +12,9 @@ print(bootstrap_servers)
 try:
     print(Host)
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.connect((Host, Port)) 
+    server.connect(('servers', Port)) 
     server.settimeout(10)
-    print(f"Connected to server at {Host}:{Port}")
+    # print(f"Connected to server at {Host}:{Port}")
  
     
     producer = Producer({"bootstrap.servers": 'kafka:9092'})
