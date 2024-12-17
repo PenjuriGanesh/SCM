@@ -1,11 +1,9 @@
 from confluent_kafka import Consumer
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import json,os
 from pymongo import MongoClient
 from pymongo.database import Database
  
-
-load_dotenv(dotenv_path=".env")
  
 
 bootstrap_servers = os.getenv("BOOTSTRAP_SERVERS")
