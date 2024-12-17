@@ -1,6 +1,6 @@
 from confluent_kafka import Producer
 import json, os, socket
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
  
 # load_dotenv()
  
@@ -17,7 +17,7 @@ try:
     print(f"Connected to server at {Host}:{Port}")
  
     
-    producer = Producer({"bootstrap.servers": bootstrap_servers})
+    producer = Producer({"bootstrap.servers": 'kafka:9092'})
  
     
     def send_message(topic, message):

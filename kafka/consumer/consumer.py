@@ -1,5 +1,5 @@
-from  confluent_kafka import Consumer
-from dotenv import load_dotenv
+from confluent_kafka import Consumer
+# from dotenv import load_dotenv
 import json,os
 from pymongo import MongoClient
 from pymongo.database import Database
@@ -26,7 +26,7 @@ if not bootstrap_servers:
     raise ValueError("Kafka bootstrap servers are not set in .env")
  
 consumer_config = {
-    'bootstrap.servers': bootstrap_servers,
+    'bootstrap.servers': 'kafka:9092',
     'group.id': 'my-group',
     'auto.offset.reset': 'earliest'
 }
