@@ -1,20 +1,16 @@
 from confluent_kafka import Producer
 import json, os, socket
-# from dotenv import load_dotenv
-
+from dotenv import load_dotenv
+ 
+# load_dotenv()
  
 bootstrap_servers = os.getenv("BOOTSTRAP_SERVERS")
 Host = os.getenv("HOST")
 Port = int(os.getenv("PORT"))
-
-print("Hi")
 print(bootstrap_servers)
-print(Host)
-print(Port)
- 
 
 try:
-   
+    print(Host)
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.connect((Host, Port)) 
     server.settimeout(10)

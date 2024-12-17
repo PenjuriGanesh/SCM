@@ -1,15 +1,17 @@
-from confluent_kafka import Consumer
-# from dotenv import load_dotenv
+from  confluent_kafka import Consumer
+from dotenv import load_dotenv
 import json,os
 from pymongo import MongoClient
 from pymongo.database import Database
  
+
+# load_dotenv(dotenv_path=".env")
  
 
-bootstrap_servers = os.getenv("BOOTSTRAP_SERVERS")
 connection_string = os.getenv("MONGODB_URI")
 database_name = os.getenv("MONGODB_DATABASE")
- 
+
+
 if not connection_string or not database_name:
     raise ValueError("MongoDB connection string or database name is not set in .env")
  
@@ -19,8 +21,7 @@ database = client[database_name]
 device_data_stream1= database["Device_Data_Stream"]
  
 
-print("Hi")
-print(bootstrap_servers)
+bootstrap_servers = os.getenv("BOOTSTRAP_SERVERS")
 if not bootstrap_servers:
     raise ValueError("Kafka bootstrap servers are not set in .env")
  
