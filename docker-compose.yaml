@@ -36,8 +36,11 @@ services:
   producer:
     build: ./kafka/producer
     # image: ganesh724/producer:latest
-    # environment:
-    #   - BOOTSTRAP_SERVERS =kafka:9092
+    environment:
+      - BOOTSTRAP_SERVERS =kafka:9092
+      - HOST=servers
+      - PORT =12345
+      - TOPIC=device_data
     depends_on:
       - servers
       - kafka
@@ -45,8 +48,13 @@ services:
   consumer:
     build: ./kafka/consumer
     # image: ganesh724/consumer:latest
-    # environment:
-    #   - BOOTSTRAP_SERVERS =kafka:9092
+    environment:
+      - BOOTSTRAP_SERVERS =kafka:9092
+      - group_id=scm-consumer
+      - topic=device_data
+      - Device_Data_Stream=Device_Data_Stream
+      - MONGODB_DATABASE=SCMXpert
+      - MONGODB_URI='mongodb+srv://Ganesh:databasebd12@cluster0.clibo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0c'
     depends_on:
       - producer
       - kafka
