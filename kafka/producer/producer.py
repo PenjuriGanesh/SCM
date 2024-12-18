@@ -1,20 +1,18 @@
 from confluent_kafka import Producer
 import json, os, socket
-# from dotenv import load_dotenv
- 
-# load_dotenv()
+
  
 bootstrap_servers = os.getenv("BOOTSTRAP_SERVERS")
 Host = os.getenv("HOST")
 Port = int(os.getenv("PORT"))
-print(bootstrap_servers)
+
 
 try:
     print(Host)
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.connect(('servers', Port)) 
     server.settimeout(10)
-    # print(f"Connected to server at {Host}:{Port}")
+    
  
     
     producer = Producer({"bootstrap.servers": 'kafka:9092'})
