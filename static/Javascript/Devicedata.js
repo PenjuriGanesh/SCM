@@ -12,6 +12,24 @@ document.addEventListener("DOMContentLoaded", function () {
         errorMessageElement.textContent = message;
     }
 
+        
+    function populateTable(data) {
+        const tableBody = document.querySelector("#device-data-table tbody");
+        tableBody.innerHTML = "";
+
+        data.forEach(device => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${device.Device_Id || "N/A"}</td>
+                <td>${device.Battery_Level || "N/A"}</td>
+                <td>${device.First_Sensor_temperature || "N/A"}</td>
+                <td>${device.Route_From || "N/A"}</td>
+                <td>${device.Route_To || "N/A"}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
     
     async function fetchFilteredDeviceData(deviceId) {
         const apiUrl = "/devicedata-fetch";  
@@ -52,29 +70,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    
-    function populateTable(data) {
-        const tableBody = document.querySelector("#device-data-table tbody");
-        tableBody.innerHTML = "";
-
-        data.forEach(device => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${device.Device_Id || "N/A"}</td>
-                <td>${device.Battery_Level || "N/A"}</td>
-                <td>${device.First_Sensor_temperature || "N/A"}</td>
-                <td>${device.Route_From || "N/A"}</td>
-                <td>${device.Route_To || "N/A"}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
 
     
     const submitButton = document.getElementById("submit");
     if (submitButton) {
         submitButton.addEventListener("click", function () {
-            const deviceId = document.getElementById("device_id").value.trim();
+            const deviceId = document.getElementById("device_id").value();
             if (!deviceId) {
                 displayError("Please select a Device ID.");
                 return;

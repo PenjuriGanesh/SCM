@@ -1,5 +1,4 @@
 function openModal(username, email, role) {
-    // Set the values of the form inputs
     document.getElementById('user').value = username;  
     document.getElementById('username').value = username;  
     document.getElementById('email').value = email; 

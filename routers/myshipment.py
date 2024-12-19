@@ -36,9 +36,8 @@ def my_shipments(request: Request, current_user: dict = Depends(fetch_user_from_
 
     except Exception as e:
       
-        print(f"Error fetching shipments: {e}")
-        return html.TemplateResponse(
-            "Myshipment.html",{"request": request,"shipments": [],"role": current_user.get("role", "user"),"error_message": "An error occurred while fetching shipments.",},)
+        # print(f"Error fetching shipments: {e}")
+        return html.TemplateResponse("Myshipment.html",{"request": request,"shipments": [],"role": current_user.get("role", "user"),"error_message": "An error occurred while fetching shipments.",},)
 
 COOKIE_NAME = "access_token"
 @app.post("/logout")

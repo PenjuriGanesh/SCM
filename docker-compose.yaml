@@ -33,7 +33,7 @@ services:
     depends_on:
       - kafka
  
-  producer:
+  producer: 
     build: ./kafka/producer
     depends_on:
       - servers

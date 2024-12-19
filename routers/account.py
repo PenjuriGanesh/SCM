@@ -19,16 +19,11 @@ async def account(request: Request, user: dict = Depends(fetch_user_from_cookie)
         username = user.get("user") 
         email = user.get("email")
 
-        return html.TemplateResponse(
-            "Account.html", {"request": request, "username": username, "email": email}
-        )
+        return html.TemplateResponse("Account.html", {"request": request, "username": username, "email": email})
     except ValueError as ve:
         raise HTTPException(status_code=400, detail=str(ve))
     except Exception as e:
-        return JSONResponse(
-            content={"error": "An unexpected error occurred. Please try again later."},
-            status_code=500,
-        )
+        return JSONResponse(content={"error": "An unexpected error occurred. Please try again later."},status_code=500,)
     
 
 COOKIE_NAME = "access_token"  

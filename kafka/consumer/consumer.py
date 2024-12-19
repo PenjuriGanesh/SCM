@@ -33,7 +33,7 @@ consumer.subscribe(['device_data_stream'])
  
 try:
         while True:
-            msg = consumer.poll(1.0)
+            msg = consumer.poll(1.0)  #Polls Kafka for messages.The argument 1.0 is the timeout in seconds.
             if msg is None:
                 continue
             if msg.error():
