@@ -16,7 +16,7 @@ MONGODB_USER = os.getenv("mongodb_user")
 MONGODB_PASSWORD = os.getenv("mongodb_password")
 MONGO_URI = os.getenv("mongouri") 
 
-# Connect to MongoDB using the URI from .env
+
 mongo_client = pymongo.MongoClient(MONGO_URI)
 
 database = mongo_client[os.getenv("DB_NAME")] 
