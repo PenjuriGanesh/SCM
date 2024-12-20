@@ -2,10 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const responseMessage = document.getElementById('response-message');
 
-
     document.getElementById('shipment-form').addEventListener('submit', function(event) {
         event.preventDefault();  
-
 
         const formData = {
             shipment_number: parseInt(document.getElementById('sinum').value),
@@ -22,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
             shipment_description: document.getElementById('sdesc').value
         };
 
-      
         if (formData.shipment_number.toString().length !== 7) {
             responseMessage.textContent = "Shipment number must be exactly 7 digits.";
             responseMessage.classList.remove("green");
@@ -55,12 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return; 
         }
 
-        
         responseMessage.style.display = "none";
 
         const token = localStorage.getItem("access_token");
-        
-        
+
         fetch("/newshipment_user", {
             method: "POST",
             headers: {
@@ -94,20 +89,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    
     document.getElementById('canbtn').addEventListener('click', function(event) {
         event.preventDefault();  
         document.getElementById('shipment-form').reset();  
         responseMessage.style.display = "none"; 
     });
-});
 
+    const expectedDeliveryDateInput = document.getElementById("exdate");
+    const today = new Date();
+
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    };
+
+    expectedDeliveryDateInput.min = formatDate(today);
+});
 
 function logout(event) {
     event.preventDefault();  
     localStorage.removeItem("access_token");
 
-    
     fetch("/logout", {
         method: "POST", 
         credentials: "same-origin",  
@@ -117,7 +123,6 @@ function logout(event) {
     })
     .then(response => {
         if (response.ok) {
-            
             window.location.href = "/login";
         } else {
             throw new Error("Logout failed");
