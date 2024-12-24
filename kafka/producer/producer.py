@@ -10,7 +10,7 @@ Port = int(os.getenv("PORT"))
 try:
     
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.connect(('servers', Port)) 
+    server.connect((Host, Port)) 
     server.settimeout(10)
     
  
